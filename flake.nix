@@ -29,6 +29,7 @@
             #   home-manager.useUserPackages = true;
             #   home-manager.verbose = true;
             #   home-manager.backupFileExtension = ".before-nix";
+            #   home-manager.extraSpecialArgs = specialArgs;
             #   home-manager.users."${username}" = ./home/common.nix;
             # }
           ];

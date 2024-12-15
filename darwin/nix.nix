@@ -6,7 +6,7 @@
     optimise.automatic = true;
     settings = {
       experimental-features = "nix-command flakes";
-      sandbox = false; # Sandbox and macos do not play well together
+      sandbox = false; # Sandbox and macos do not play well together : https://github.com/NixOS/nix/issues/4119
       max-jobs = "auto";
       cores = 0;
       allowed-users = [ "root" "@admin" "@staff" username ];
@@ -22,5 +22,8 @@
         "zmre.cachix.org-1:WIE1U2a16UyaUVr+Wind0JM6pEXBe43PQezdPKoDWLE="
       ];
     };
+    extraOptions = ''
+      extra-platforms = x86_64-darwin aarch64-darwin
+    '';
   };
 }
