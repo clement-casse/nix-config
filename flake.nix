@@ -33,7 +33,7 @@
               home-manager.verbose = true;
               home-manager.backupFileExtension = "before-nix-darwin";
               home-manager.extraSpecialArgs = specialArgs;
-              home-manager.users."${username}" = ./home/common.nix;
+              home-manager.users."${username}" = ./home;
             }
           ];
         };

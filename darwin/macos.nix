@@ -2,16 +2,10 @@ _: {
   ## macOS very generic settings
   system.defaults.NSGlobalDomain = {
     AppleFontSmoothing = 2; # 2 = heavy font smoothing; if text looks blurry, back this down to 1
-    AppleTemperatureUnit = "Celsius";
-    AppleMeasurementUnits = "Centimeters";
 
     # Whether to automatically switch between light and dark mode. The default is false.
     AppleInterfaceStyleSwitchesAutomatically = true;
     #AppleInterfaceStyle = "Dark"; # If AppleInterfaceStyleSwitchesAutomatically is false the Dark theme can be manually applied here.
-  };
-  system.defaults.CustomUserPreferences."com.apple.desktopservices" = {
-    DSDontWriteNetworkStores = true; # Avoid creating .DS_Store files on network volumes
-    DSDontWriteUSBStores = true; # Avoid creating .DS_Store files on USB volumes
   };
 
   ## Finder
@@ -19,7 +13,6 @@ _: {
     FXPreferredViewStyle = "clmv"; # Change the default finder view. “icnv” = Icon view, “Nlsv” = List view, “clmv” = Column View, “Flwv” = Gallery View The default is icnv.
     ShowHardDrivesOnDesktop = true;
     ShowMountedServersOnDesktop = true;
-    ShowPathbar = true;
   };
   system.defaults.CustomUserPreferences."com.apple.finder" = {
     ShowExternalHardDrivesOnDesktop = true;
@@ -33,7 +26,7 @@ _: {
   system.defaults.trackpad = {
     Clicking = false;
     TrackpadRightClick = true;
-    TrackpadThreeFingerDrag = true;
+    TrackpadThreeFingerDrag = false;
   };
   system.defaults.NSGlobalDomain = {
     # Enables swiping left or right with two fingers to navigate backward or forward. The default is true.
@@ -58,14 +51,6 @@ _: {
 
     # Use F1, F2, etc. keys as standard function keys.
     "com.apple.keyboard.fnState" = true;
-
-    # Typing susbstitution settings:
-    NSAutomaticCapitalizationEnabled = true; # Whether to enable automatic capitalization.
-    NSAutomaticInlinePredictionEnabled = false; # Whether to enable inline predictive text.
-    NSAutomaticDashSubstitutionEnabled = false; # Whether to enable smart dash substitution. 
-    NSAutomaticPeriodSubstitutionEnabled = false; # Whether to enable smart period substitution.
-    NSAutomaticQuoteSubstitutionEnabled = true; # Whether to enable smart quote substitution.
-    NSAutomaticSpellingCorrectionEnabled = false; # Whether to enable automatic spelling correction.
   };
 
   system.defaults.CustomUserPreferences = {
