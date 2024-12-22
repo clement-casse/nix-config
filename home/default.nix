@@ -9,5 +9,6 @@
     ./shells.nix
     ./git.nix
     ./darwin.nix
+    ./vscode.nix
   ];
 }

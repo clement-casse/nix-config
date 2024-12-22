@@ -4,7 +4,7 @@ _: {
     NSGlobalDomain = {
       AppleTemperatureUnit = "Celsius";
       AppleMeasurementUnits = "Centimeters";
-
+      AppleMetricUnits = true;
     };
     "com.apple.desktopservices" = {
       DSDontWriteNetworkStores = true; # Avoid creating .DS_Store files on network volumes
@@ -20,6 +20,8 @@ _: {
 
   # Typing susbstitution settings:
   targets.darwin.defaults.NSGlobalDomain = {
+    ApplePressAndHoldEnabled = false;
+
     NSAutomaticCapitalizationEnabled = true; # Whether to enable automatic capitalization.
     NSAutomaticInlinePredictionEnabled = false; # Whether to enable inline predictive text.
     NSAutomaticDashSubstitutionEnabled = false; # Whether to enable smart dash substitution.
@@ -33,5 +35,6 @@ _: {
   targets.darwin.defaults."com.apple.Safari" = {
     AutoFillPasswords = true;
     IncludeDevelopMenu = true;
+    ShowOverlayStatusBar = true;
   };
 }

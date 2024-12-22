@@ -11,7 +11,6 @@ _: {
   homebrew.casks = [
     "discord"
     "iterm2"
-    "secretive"
     "zotero"
   ];
 }

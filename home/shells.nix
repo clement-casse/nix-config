@@ -1,4 +1,4 @@
-{ pkgs, username, ... }: {
+_: {
   programs.zsh = {
     enable = true;
     autocd = true;
@@ -38,5 +38,12 @@
     enableZshIntegration = true;
     enableBashIntegration = true;
     enableNushellIntegration = false;
+  };
+
+  programs.thefuck = {
+    enable = true;
+    enableZshIntegration = true;
+    enableBashIntegration = true;
+    enableNushellIntegration = true;
   };
 }
