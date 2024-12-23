@@ -16,6 +16,11 @@ _: {
       ShowStatusBar = false;
     };
     "com.apple.menuextra.clock".Show24Hour = true;
+    "com.apple.dock" = {
+      autohide = false;
+      expose-group-apps = false;
+      orientation = "bottom";
+    };
   };
 
   # Typing susbstitution settings:

@@ -20,9 +20,6 @@
   environment.systemPackages = with pkgs; [
     curl
     gettext
-    git
-    gnupg
-    jq
     vim
   ];
 }
