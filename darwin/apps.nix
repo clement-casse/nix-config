@@ -12,5 +12,8 @@ _: {
     "discord"
     "iterm2"
     "zotero"
+
+    "nvidia-geforce-now"
+    "steam"
   ];
 }
