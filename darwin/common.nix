@@ -6,7 +6,7 @@
   time.timeZone = "Europe/Paris";
 
   environment.etc.darwin.source = inputs.nix-darwin;
-  environment.pathsToLink = [ "/Applications" ];
+  environment.pathsToLink = [ "/Applications" "/opt/homebrew/bin" "/opt/homebrew/sbin" ];
 
   # Add ability to used TouchID for sudo authentication
   security.pam.enableSudoTouchIdAuth = true;
