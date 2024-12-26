@@ -10,6 +10,9 @@ Also, the following sources have been used to find the key and values to setup m
 
 - The website [macos-defaults.com](https://macos-defaults.com) has been used to browse some setting that can be tweaked with nix-darwin.
 - The website [daiderd.com](https://daiderd.com/nix-darwin/manual/index.html) exposes an exhaustive documentation for nix darwin options.
+- The blog serie [`#nix-on-mac` on davi.sh](https://davi.sh/blog/tags/nix-on-mac/) reviews the step of adopting nix-darwin to manage a macOS device with nix.
+- The [blog post *Nix-Darwin Launch Agents*](https://www.danielcorin.com/til/nix-darwin/launch-agents/) to install services as *launch Agents*.
+- The [blog post *Tidying up your `$HOME` with Nix*](https://juliu.is/tidying-your-home-with-nix/) covers step by step how to use home-manager (no `nix-darwin` involved)
 
 Some similar projects on GitHub from peoples having similar needs:
 
