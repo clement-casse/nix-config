@@ -7,7 +7,20 @@
     AppleInterfaceStyleSwitchesAutomatically = true;
     #AppleInterfaceStyle = "Dark"; # If AppleInterfaceStyleSwitchesAutomatically is false the Dark theme can be manually applied here.
   };
+  system.defaults.CustomUserPreferences = {
+    "com.apple.AdLib".allowApplePersonalizedAdvertising = false;
+    "com.apple.TimeMachine".DoNotOfferNewDisksForBackup = true;
+    "com.apple.ImageCapture".disableHotPlug = true;
+    "com.apple.commerce".AutoUpdate = true;
+    "com.apple.SoftwareUpdate" = {
+      AutomaticCheckEnabled = true;
+      ScheduleFrequency = 1;
+      AutomaticDownload = 1; # Download newly available updates in background
+      CriticalUpdateInstall = 1; # Install System data files & security updates
+    };
+  };
 
+  ## macOS Dock configuration
   system.defaults.dock = {
     show-process-indicators = true;
     show-recents = false;
@@ -22,13 +35,14 @@
       "/System/Applications/Photos.app"
       "${pkgs.vscodium}/Applications/VSCodium.app"
       "${pkgs.zed-editor}/Applications/Zed.app"
+      "${pkgs.iterm2}/Applications/iTerm2.app"
       "/System/Applications/Passwords.app"
       "/System/Applications/App Store.app"
       "/System/Applications/System Settings.app"
     ];
   };
 
-  ## Finder
+  ## Finder related configuration
   system.defaults.finder = {
     FXPreferredViewStyle = "clmv"; # Change the default finder view. “icnv” = Icon view, “Nlsv” = List view, “clmv” = Column View, “Flwv” = Gallery View The default is icnv.
     ShowHardDrivesOnDesktop = true;
@@ -58,6 +72,7 @@
   };
 
   # Keyboard related settings
+  system.defaults.hitoolbox.AppleFnUsageType = "Do Nothing";
   system.defaults.NSGlobalDomain = {
     # Configures the keyboard control behavior. Mode 3 enables full keyboard control.
     AppleKeyboardUIMode = 3;
@@ -73,11 +88,5 @@
 
     # Use F1, F2, etc. keys as standard function keys.
     "com.apple.keyboard.fnState" = true;
-  };
-  system.defaults.hitoolbox.AppleFnUsageType = "Do Nothing";
-
-  system.defaults.CustomUserPreferences = {
-    "com.apple.AdLib".allowApplePersonalizedAdvertising = false;
-    "com.apple.commerce".AutoUpdate = true;
   };
 }

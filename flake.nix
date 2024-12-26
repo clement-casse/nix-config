@@ -35,7 +35,6 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.verbose = true;
-              home-manager.backupFileExtension = "before-nix-darwin";
               home-manager.extraSpecialArgs = specialArgs;
               home-manager.users."${username}" = ./home;
             }

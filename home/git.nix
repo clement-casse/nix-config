@@ -9,6 +9,7 @@
         init.defaultBranch = "main";
         branch.sort = "-committerdate";
         core.autocrlf = "input";
+        push.autoSetupRemote = true;
       };
     };
   };

@@ -7,10 +7,13 @@
 
   imports = [
     ./shells.nix
-    ./git.nix
-    ./darwin.nix
     ./services.nix
+    ./git.nix
+
+    ./darwin.nix
+
     ./vscode.nix
     ./zed.nix
+    ./iterm2.nix
   ];
 }

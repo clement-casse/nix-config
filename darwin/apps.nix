@@ -3,7 +3,7 @@ _: {
   homebrew.onActivation = {
     autoUpdate = true; # Fetch the newest stable branch of Homebrew's git repo
     upgrade = true; # Upgrade outdated casks, formulae, and App Store apps
-    # cleanup = "zap"; # uninstalls all formulae(and related files) not listed in the generated Brewfile
+    cleanup = "zap"; # uninstalls all formulae(and related files) not listed in the generated Brewfile
   };
 
   # Applications to install from Mac App Store using [mas](https://github.com/mas-cli/mas).
@@ -15,6 +15,8 @@ _: {
 
   homebrew.casks = [
     "iterm2"
+    "brave-browser"
+    "orbstack"
     "netnewswire"
     "vlc"
     "zotero"
