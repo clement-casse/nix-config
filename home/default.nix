@@ -11,5 +11,6 @@
     ./darwin.nix
     ./services.nix
     ./vscode.nix
+    ./zed.nix
   ];
 }
