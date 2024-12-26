@@ -6,7 +6,8 @@
   time.timeZone = "Europe/Paris";
 
   environment.etc.darwin.source = inputs.nix-darwin;
-  environment.pathsToLink = [ "/Applications" "/opt/homebrew/bin" "/opt/homebrew/sbin" ];
+  environment.pathsToLink = [ "/Applications" ];
+  environment.systemPath = [ "/opt/homebrew/bin" "/opt/homebrew/sbin" ];
 
   # Add ability to used TouchID for sudo authentication
   security.pam.enableSudoTouchIdAuth = true;
@@ -18,6 +19,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    coreutils
     curl
     gettext
     vim
