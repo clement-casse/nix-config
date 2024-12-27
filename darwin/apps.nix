@@ -1,4 +1,7 @@
 _: {
+  # Add homebrew installation directories to the system path to make homebrew binaries available in the shell.
+  environment.systemPath = [ "/opt/homebrew/bin" "/opt/homebrew/sbin" ];
+
   homebrew.enable = true;
   homebrew.onActivation = {
     autoUpdate = true; # Fetch the newest stable branch of Homebrew's git repo

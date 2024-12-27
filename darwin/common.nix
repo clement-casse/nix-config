@@ -7,9 +7,8 @@
 
   environment.etc.darwin.source = inputs.nix-darwin;
   environment.pathsToLink = [ "/Applications" ];
-  environment.systemPath = [ "/opt/homebrew/bin" "/opt/homebrew/sbin" ];
 
-  # Add ability to used TouchID for sudo authentication
+  # Add ability to use TouchID for sudo authentication
   security.pam.enableSudoTouchIdAuth = true;
 
   environment.shells = with pkgs; [

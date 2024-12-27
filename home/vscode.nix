@@ -13,7 +13,6 @@
       vscode-extensions.ms-kubernetes-tools.vscode-kubernetes-tools
       vscode-extensions.tamasfe.even-better-toml
       vscode-extensions.rust-lang.rust-analyzer
-      vscode-extensions.vadimcn.vscode-lldb
       vscode-extensions.zxh404.vscode-proto3
       vscode-extensions.thenuprojectcontributors.vscode-nushell-lang
       vscode-extensions.golang.go
