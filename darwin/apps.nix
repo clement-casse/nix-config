@@ -17,7 +17,7 @@ _: {
   };
 
   homebrew.casks = [
-    "iterm2"
+    "iterm2" # TODO Remove once Ghostty is adopted
     "brave-browser"
     "orbstack"
     "netnewswire"

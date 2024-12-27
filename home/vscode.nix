@@ -1,8 +1,13 @@
-{ pkgs, ... }: {
+{ pkgs, system, nix-vscode-extensions, ... }: 
+let 
+  vscodeExtensions = nix-vscode-extensions.extensions."${system}".vscode-marketplace;
+in
+{
   programs.vscode = {
     enable = true;
-    package = pkgs.vscodium;
-    extensions = with pkgs.vscode-extensions; [
+    package = pkgs.vscode;
+    mutableExtensionsDir = false; # Allow to install extensions by hand and not rerun nix-switch
+    extensions = with vscodeExtensions; [
       # Extensions
       mkhl.direnv
       bbenoist.nix
@@ -13,10 +18,12 @@
       ms-kubernetes-tools.vscode-kubernetes-tools
       tamasfe.even-better-toml
       rust-lang.rust-analyzer
+      vadimcn.vscode-lldb
+      ms-vscode.live-server
+      ryanluker.vscode-coverage-gutters
       zxh404.vscode-proto3
       thenuprojectcontributors.vscode-nushell-lang
       golang.go
-      nvarner.typst-lsp
 
       # Themes
       teabyii.ayu

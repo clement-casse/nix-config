@@ -1,7 +1,7 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, system, ... }: {
   system.configurationRevision = inputs.rev or inputs.dirtyRev or null;
   system.stateVersion = 5;
-  nixpkgs.hostPlatform = "aarch64-darwin";
+  nixpkgs.hostPlatform = system;
   nixpkgs.config.allowUnfree = true;
   time.timeZone = "Europe/Paris";
 

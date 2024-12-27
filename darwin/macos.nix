@@ -33,7 +33,7 @@
       "/System/Applications/Messages.app"
       "/System/Applications/Music.app"
       "/System/Applications/Photos.app"
-      "${pkgs.vscodium}/Applications/VSCodium.app"
+      "${pkgs.vscode}/Applications/Visual Studio Code.app"
       "${pkgs.zed-editor}/Applications/Zed.app"
       "/System/Applications/Passwords.app"
       "/System/Applications/App Store.app"

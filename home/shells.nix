@@ -1,4 +1,4 @@
-_: {
+{ pkgs, ... }: {
   programs.zsh = {
     enable = true;
     autocd = true;
@@ -16,6 +16,13 @@ _: {
 
   programs.nushell = {
     enable = true;
+    plugins = with pkgs.nushellPlugins; [
+      formats
+      query
+    ];
+    shellAliases = {
+      ll = "ls -l";
+    };
   };
 
   programs.starship = {
@@ -40,7 +47,7 @@ _: {
     enableNushellIntegration = false;
   };
 
-  programs.thefuck = {
+  programs.pay-respects = {
     enable = true;
     enableZshIntegration = true;
     enableBashIntegration = true;
