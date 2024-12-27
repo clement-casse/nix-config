@@ -14,6 +14,5 @@
 
     ./vscode.nix
     ./zed.nix
-    ./iterm2.nix
   ];
 }

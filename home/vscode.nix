@@ -2,25 +2,25 @@
   programs.vscode = {
     enable = true;
     package = pkgs.vscodium;
-    extensions = with pkgs; [
+    extensions = with pkgs.vscode-extensions; [
       # Extensions
-      vscode-extensions.mkhl.direnv
-      vscode-extensions.bbenoist.nix
-      vscode-extensions.jnoortheen.nix-ide
-      vscode-extensions.arrterian.nix-env-selector
-      vscode-extensions.editorconfig.editorconfig
-      vscode-extensions.redhat.vscode-yaml
-      vscode-extensions.ms-kubernetes-tools.vscode-kubernetes-tools
-      vscode-extensions.tamasfe.even-better-toml
-      vscode-extensions.rust-lang.rust-analyzer
-      vscode-extensions.zxh404.vscode-proto3
-      vscode-extensions.thenuprojectcontributors.vscode-nushell-lang
-      vscode-extensions.golang.go
-      vscode-extensions.nvarner.typst-lsp
+      mkhl.direnv
+      bbenoist.nix
+      jnoortheen.nix-ide
+      arrterian.nix-env-selector
+      editorconfig.editorconfig
+      redhat.vscode-yaml
+      ms-kubernetes-tools.vscode-kubernetes-tools
+      tamasfe.even-better-toml
+      rust-lang.rust-analyzer
+      zxh404.vscode-proto3
+      thenuprojectcontributors.vscode-nushell-lang
+      golang.go
+      nvarner.typst-lsp
 
       # Themes
-      vscode-extensions.teabyii.ayu
-      vscode-extensions.arcticicestudio.nord-visual-studio-code
+      teabyii.ayu
+      arcticicestudio.nord-visual-studio-code
     ];
 
     userSettings = {

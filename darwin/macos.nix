@@ -35,7 +35,6 @@
       "/System/Applications/Photos.app"
       "${pkgs.vscodium}/Applications/VSCodium.app"
       "${pkgs.zed-editor}/Applications/Zed.app"
-      "${pkgs.iterm2}/Applications/iTerm2.app"
       "/System/Applications/Passwords.app"
       "/System/Applications/App Store.app"
       "/System/Applications/System Settings.app"
