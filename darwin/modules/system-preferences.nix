@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+_: {
   ## macOS very generic settings
   system.defaults.NSGlobalDomain = {
     AppleFontSmoothing = 2; # 2 = heavy font smoothing; if text looks blurry, back this down to 1
@@ -20,33 +20,14 @@
     };
   };
 
-  ## macOS Dock configuration
-  system.defaults.dock = {
-    show-process-indicators = true;
-    show-recents = false;
-    minimize-to-application = false;
-    persistent-apps = [
-      "/System/Applications/Launchpad.app"
-      "/System/Applications/Mail.app"
-      "/Applications/Safari.app"
-      "/System/Applications/Calendar.app"
-      "/System/Applications/Messages.app"
-      "/System/Applications/Music.app"
-      "/System/Applications/Photos.app"
-      "${pkgs.vscode}/Applications/Visual Studio Code.app"
-      "${pkgs.zed-editor}/Applications/Zed.app"
-      "/System/Applications/Passwords.app"
-      "/System/Applications/App Store.app"
-      "/System/Applications/System Settings.app"
-    ];
-  };
-
   ## Finder related configuration
   system.defaults.finder = {
-    FXPreferredViewStyle = "clmv"; # Change the default finder view. “icnv” = Icon view, “Nlsv” = List view, “clmv” = Column View, “Flwv” = Gallery View The default is icnv.
+    AppleShowAllFiles = false;
+    QuitMenuItem = false;
     ShowHardDrivesOnDesktop = true;
     ShowRemovableMediaOnDesktop = true;
     ShowMountedServersOnDesktop = true;
+    FXPreferredViewStyle = "clmv"; # Change the default finder view. “icnv” = Icon view, “Nlsv” = List view, “clmv” = Column View, “Flwv” = Gallery View The default is icnv.
     _FXSortFoldersFirstOnDesktop = true;
   };
   system.defaults.CustomUserPreferences."com.apple.finder" = {

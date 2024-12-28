@@ -23,16 +23,11 @@
     in
     {
       darwinConfigurations = {
-        # $ nix run nix-darwin -- switch --flake ".#PowerBook-M2" --impure
-        "PowerBook-M2" = nix-darwin.lib.darwinSystem {
+        # $ nix run nix-darwin -- switch --flake ".#PowerBook" --impure
+        "PowerBook" = nix-darwin.lib.darwinSystem {
           specialArgs = specialArgs // { system = "aarch64-darwin"; };
           modules = [
-            ./darwin/common.nix
-            ./darwin/nix.nix
-            ./darwin/fonts.nix
-            ./darwin/macos.nix
-            ./darwin/users.nix
-            ./darwin/apps.nix
+            ./darwin/PowerBook.nix
             home-manager.darwinModules.home-manager {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;

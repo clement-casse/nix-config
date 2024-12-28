@@ -11,16 +11,22 @@
   # Add ability to use TouchID for sudo authentication
   security.pam.enableSudoTouchIdAuth = true;
 
-  environment.shells = with pkgs; [
-    zsh
-    bashInteractive
-    nushell
-  ];
-
   environment.systemPackages = with pkgs; [
     coreutils
     curl
     gettext
     vim
+  ];
+
+  imports = [
+    ./modules/nix.nix
+    ./modules/shells.nix
+    ./modules/fonts.nix
+    ./modules/users.nix
+
+    ./modules/homebrew.nix
+
+    ./modules/system-preferences.nix
+    ./modules/dock.nix
   ];
 }
