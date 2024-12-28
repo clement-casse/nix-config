@@ -1,5 +1,5 @@
-{ pkgs, system, nix-vscode-extensions, ... }: 
-let 
+{ pkgs, system, nix-vscode-extensions, ... }:
+let
   vscodeExtensions = nix-vscode-extensions.extensions."${system}".vscode-marketplace;
 in
 {
@@ -78,11 +78,11 @@ in
       "[proto3]" = {
         "editor.formatOnSave" = true;
         "editor.tabSize" = 2;
-        "editor.rulers" = [80];
+        "editor.rulers" = [ 80 ];
       };
 
       "[python]" = {
-        "editor.rulers" = [100];
+        "editor.rulers" = [ 100 ];
       };
 
       "chat.commandCenter.enabled" = false;

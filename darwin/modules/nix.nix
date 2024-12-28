@@ -1,4 +1,4 @@
-{ pkgs, username, system, ... }: 
+{ pkgs, username, system, ... }:
 let
   lib = pkgs.lib;
 in

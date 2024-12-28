@@ -9,7 +9,7 @@
     history = {
       expireDuplicatesFirst = true;
       ignoreDups = true;
-      ignorePatterns = [];
+      ignorePatterns = [ ];
       ignoreSpace = true;
     };
   };
