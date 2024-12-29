@@ -1,9 +1,13 @@
 { pkgs, ... }: {
   ## macOS Dock configuration
   system.defaults.dock = {
+    autohide = false;
+    expose-group-apps = false;
+    orientation = "bottom";
     show-process-indicators = true;
     show-recents = false;
     minimize-to-application = false;
+    scroll-to-open = true;
     persistent-apps = [
       "/System/Applications/Launchpad.app"
       "/System/Applications/Mail.app"
@@ -18,5 +22,6 @@
       "/System/Applications/App Store.app"
       "/System/Applications/System Settings.app"
     ];
+    persistent-others = [ ];
   };
 }

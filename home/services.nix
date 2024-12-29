@@ -5,4 +5,6 @@ _: {
     enableBashIntegration = true;
     enableNushellIntegration = true;
   };
+
+  # TODO Add Docker or colima 
 }

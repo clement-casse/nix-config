@@ -1,6 +1,17 @@
 _: {
   ## macOS very generic settings
+  time.timeZone = "Europe/Paris";
+  system.defaults.menuExtraClock = {
+    Show24Hour = true;
+    ShowDate = 0; # 0 = When space allows 1 = Always 2 = Never
+    FlashDateSeparators = false;
+    ShowSeconds = false;
+  };
   system.defaults.NSGlobalDomain = {
+    AppleTemperatureUnit = "Celsius";
+    AppleMeasurementUnits = "Centimeters";
+    AppleMetricUnits = 1;
+
     AppleFontSmoothing = 2; # 2 = heavy font smoothing; if text looks blurry, back this down to 1
 
     # Whether to automatically switch between light and dark mode. The default is false.
@@ -18,24 +29,29 @@ _: {
       AutomaticDownload = 1; # Download newly available updates in background
       CriticalUpdateInstall = 1; # Install System data files & security updates
     };
+    "com.apple.desktopservices" = {
+      DSDontWriteNetworkStores = true; # Avoid creating .DS_Store files on network volumes
+      DSDontWriteUSBStores = true; # Avoid creating .DS_Store files on USB volumes
+    };
   };
 
   ## Finder related configuration
   system.defaults.finder = {
+    ShowPathbar = true;
+    ShowStatusBar = false;
     AppleShowAllFiles = false;
+    FXRemoveOldTrashItems = true;
     QuitMenuItem = false;
-    ShowHardDrivesOnDesktop = true;
-    ShowRemovableMediaOnDesktop = true;
-    ShowMountedServersOnDesktop = true;
+
+    NewWindowTarget = "Home";
     FXPreferredViewStyle = "clmv"; # Change the default finder view. “icnv” = Icon view, “Nlsv” = List view, “clmv” = Column View, “Flwv” = Gallery View The default is icnv.
-    _FXSortFoldersFirstOnDesktop = true;
-  };
-  system.defaults.CustomUserPreferences."com.apple.finder" = {
+    _FXSortFoldersFirst = true;
+
     ShowExternalHardDrivesOnDesktop = true;
     ShowHardDrivesOnDesktop = true;
-    ShowMountedServersOnDesktop = true;
     ShowRemovableMediaOnDesktop = true;
-    _FXSortFoldersFirst = true;
+    ShowMountedServersOnDesktop = true;
+    _FXSortFoldersFirstOnDesktop = true;
   };
 
   ## Trackpad related settings
@@ -68,5 +84,12 @@ _: {
 
     # Use F1, F2, etc. keys as standard function keys.
     "com.apple.keyboard.fnState" = true;
+
+    NSAutomaticCapitalizationEnabled = true; # Whether to enable automatic capitalization.
+    NSAutomaticInlinePredictionEnabled = false; # Whether to enable inline predictive text.
+    NSAutomaticDashSubstitutionEnabled = false; # Whether to enable smart dash substitution.
+    NSAutomaticPeriodSubstitutionEnabled = false; # Whether to enable smart period substitution.
+    NSAutomaticQuoteSubstitutionEnabled = true; # Whether to enable smart quote substitution.
+    NSAutomaticSpellingCorrectionEnabled = false; # Whether to enable automatic spelling correction.
   };
 }

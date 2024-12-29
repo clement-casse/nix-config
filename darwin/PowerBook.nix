@@ -1,9 +1,8 @@
-{ pkgs, inputs, system, ... }: {
+{ inputs, system, ... }: {
   system.configurationRevision = inputs.rev or inputs.dirtyRev or null;
   system.stateVersion = 5;
   nixpkgs.hostPlatform = system;
   nixpkgs.config.allowUnfree = true;
-  time.timeZone = "Europe/Paris";
 
   environment.etc.darwin.source = inputs.nix-darwin;
   environment.pathsToLink = [ "/Applications" ];
