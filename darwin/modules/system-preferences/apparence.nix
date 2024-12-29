@@ -12,4 +12,15 @@ _: {
     #AppleInterfaceStyle = "Dark"; # If AppleInterfaceStyleSwitchesAutomatically is false the Dark theme can be manually applied here.
     _HIHideMenuBar = false; # Whether to autohide the menu bar.
   };
+
+  ## macOS Dock configuration
+  system.defaults.dock = {
+    autohide = false;
+    expose-group-apps = false;
+    orientation = "bottom";
+    show-process-indicators = true;
+    show-recents = false;
+    minimize-to-application = false;
+    scroll-to-open = true;
+  };
 }

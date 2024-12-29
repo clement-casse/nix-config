@@ -9,9 +9,6 @@
     ./shells.nix
     ./services.nix
     ./git.nix
-
-    ./darwin.nix
-
     ./vscode.nix
     ./zed.nix
   ];

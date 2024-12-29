@@ -46,6 +46,22 @@
             }
           ];
         };
+
+        # $ nix run nix-darwin -- switch --flake ".#Workstation" --impure
+        "Workstation" = nix-darwin.lib.darwinSystem {
+          specialArgs = specialArgs // { system = "aarch64-darwin"; };
+          modules = [
+            ./darwin/Workstation.nix
+            home-manager.darwinModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.verbose = true;
+              home-manager.extraSpecialArgs = specialArgs // { system = "aarch64-darwin"; };
+              home-manager.users."${username}" = ./home;
+            }
+          ];
+        };
       };
     }
     // utils.lib.eachDefaultSystem (system:
