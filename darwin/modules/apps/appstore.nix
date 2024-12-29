@@ -5,4 +5,14 @@ _: {
     "The Unarchiver" = 425424353;
     "reMarkable desktop" = 1276493162;
   };
+
+  system.defaults.CustomUserPreferences = {
+    "com.apple.commerce".AutoUpdate = true;
+    "com.apple.SoftwareUpdate" = {
+      AutomaticCheckEnabled = true;
+      ScheduleFrequency = 1;
+      AutomaticDownload = 1; # Download newly available updates in background
+      CriticalUpdateInstall = 1; # Install System data files & security updates
+    };
+  };
 }

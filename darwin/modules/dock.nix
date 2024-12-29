@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, username, ... }: {
   ## macOS Dock configuration
   system.defaults.dock = {
     autohide = false;
@@ -22,6 +22,8 @@
       "/System/Applications/App Store.app"
       "/System/Applications/System Settings.app"
     ];
-    persistent-others = [ ];
+    persistent-others = [
+      "/Users/${username}/Downloads"
+    ];
   };
 }
