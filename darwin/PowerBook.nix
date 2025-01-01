@@ -28,7 +28,6 @@
     ./modules/system-preferences/keyboard.nix
     ./modules/system-preferences/trackpad.nix
     ./modules/system-preferences/menu-bar.nix
-    ./modules/system-preferences/stage-manager.nix
     ./modules/system-preferences/others.nix
   ];
 
