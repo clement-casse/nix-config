@@ -1,7 +1,9 @@
-{ lib, pkgs, ... }: 
+{ lib, pkgs, ... }:
+with lib;
 let
   inherit (pkgs.stdenv.hostPlatform) isDarwin;
-in {
+in
+{
   xdg.configFile = {
     "ghostty/config".text = ''
       font-family = 'JetBrainsMono Nerd Font Mono'
@@ -19,7 +21,7 @@ in {
       config-file = ?config-macos
     '';
 
-    "ghostty/config-macos".text = lib.mkIf isDarwin ''
+    "ghostty/config-macos".text = mkIf isDarwin ''
       macos-non-native-fullscreen = visible-menu
       initial-window = false
       quick-terminal-position = top

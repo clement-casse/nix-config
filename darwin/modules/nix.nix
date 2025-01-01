@@ -1,7 +1,5 @@
-{ pkgs, username, system, ... }:
-let
-  lib = pkgs.lib;
-in
+{ lib, username, system, ... }:
+with lib;
 {
   services.nix-daemon.enable = true;
 
@@ -24,7 +22,7 @@ in
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       ];
     };
-    extraOptions = lib.mkIf (system == "aarch64-darwin") ''
+    extraOptions = mkIf (system == "aarch64-darwin") ''
       extra-platforms = x86_64-darwin aarch64-darwin
     '';
   };

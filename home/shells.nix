@@ -53,4 +53,6 @@
     enableBashIntegration = true;
     enableNushellIntegration = true;
   };
+
+  home.file.".hushlogin".text = "";
 }
