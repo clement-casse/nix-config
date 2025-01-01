@@ -23,4 +23,19 @@ _: {
     minimize-to-application = false;
     scroll-to-open = true;
   };
+
+  ## Hot corner actions
+  # Valid values are:
+  # 1: Disabled             2: Mission Control
+  # 3: Application Windows  4: Desktop
+  # 5: Start Screen Saver   6: Disable Screen Saver
+  # 7: Dashboard            10: Put Display to Sleep
+  # 11: Launchpad           12: Notification Center
+  # 13: Lock Screen         14: Quick Note
+  system.defaults.dock = {
+    wvous-tl-corner = 1;  # Top Left Corner
+    wvous-tr-corner = 12; # Top Right Corner
+    wvous-bl-corner = 1;  # Bottom Left Corner
+    wvous-br-corner = 1;  # Bottom Right Corner
+  };
 }
