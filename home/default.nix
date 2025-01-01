@@ -9,6 +9,7 @@
     ./shells.nix
     ./services.nix
     ./git.nix
+    ./ghostty.nix
     ./vscode.nix
     ./zed.nix
   ];
