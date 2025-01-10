@@ -10,7 +10,6 @@ _: {
   };
 
   homebrew.casks = [
-    "ghostty"
     "brave-browser"
     "orbstack"
     "netnewswire"
