@@ -13,11 +13,6 @@
   security.pam.enableSudoTouchIdAuth = true;
 
   imports = [
-    ./modules/nix.nix
-    ./modules/shells.nix
-    ./modules/fonts.nix
-    ./modules/users.nix
-
     ./modules/apps/packages.nix
     ./modules/apps/homebrew.nix
     ./modules/apps/appstore.nix

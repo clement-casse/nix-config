@@ -18,10 +18,9 @@ _: {
     ShowMountedServersOnDesktop = true;
     _FXSortFoldersFirstOnDesktop = true;
   };
-  system.defaults.CustomUserPreferences = {
-    "com.apple.desktopservices" = {
-      DSDontWriteNetworkStores = true; # Avoid creating .DS_Store files on network volumes
-      DSDontWriteUSBStores = true; # Avoid creating .DS_Store files on USB volumes
-    };
+  system.defaults.CustomUserPreferences."com.apple.desktopservices" = {
+    DSDontWriteNetworkStores = true; # Avoid creating .DS_Store files on network volumes
+    DSDontWriteUSBStores = true; # Avoid creating .DS_Store files on USB volumes
   };
+
 }

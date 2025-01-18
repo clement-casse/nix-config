@@ -1,4 +1,7 @@
-{ lib, username, system, ... }:
+{ pkgs, lib, username, system, ... }:
+let
+  inherit (pkgs.stdenv.hostPlatform) isDarwin;
+in
 with lib;
 {
   services.nix-daemon.enable = true;
@@ -22,7 +25,7 @@ with lib;
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       ];
     };
-    extraOptions = mkIf (system == "aarch64-darwin") ''
+    extraOptions = mkIf (isDarwin && system == "aarch64-darwin") ''
       extra-platforms = x86_64-darwin aarch64-darwin
     '';
   };

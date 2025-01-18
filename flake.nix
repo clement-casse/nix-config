@@ -17,9 +17,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "utils";
     };
+    mac-app-util = {
+      url = "github:hraban/mac-app-util";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "utils";
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, utils, nix-darwin, home-manager, nix-vscode-extensions }:
+  outputs = inputs@{ self, nixpkgs, utils, nix-darwin, home-manager, nix-vscode-extensions, mac-app-util }:
     let
       username = builtins.getEnv "USER";
       fullname = "Clément Cassé";
@@ -35,13 +40,16 @@
         "PowerBook" = nix-darwin.lib.darwinSystem {
           specialArgs = specialArgs // { system = "aarch64-darwin"; };
           modules = [
+            ./common
             ./darwin/PowerBook.nix
+            mac-app-util.darwinModules.default
             home-manager.darwinModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.verbose = true;
               home-manager.extraSpecialArgs = specialArgs // { system = "aarch64-darwin"; };
+              home-manager.sharedModules = [ mac-app-util.homeManagerModules.default ];
               home-manager.users."${username}" = ./home;
             }
           ];
@@ -51,13 +59,16 @@
         "Workstation" = nix-darwin.lib.darwinSystem {
           specialArgs = specialArgs // { system = "aarch64-darwin"; };
           modules = [
+            ./common
             ./darwin/Workstation.nix
+            mac-app-util.darwinModules.default
             home-manager.darwinModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.verbose = true;
               home-manager.extraSpecialArgs = specialArgs // { system = "aarch64-darwin"; };
+              home-manager.sharedModules = [ mac-app-util.homeManagerModules.default ];
               home-manager.users."${username}" = ./home;
             }
           ];
@@ -72,6 +83,12 @@
       in
       {
         formatter = pkgs.nixpkgs-fmt;
+
+        devShells.default = pkgs.mkShell {
+          buildInputs = with pkgs; [
+            nil
+          ];
+        };
       }
     );
 }

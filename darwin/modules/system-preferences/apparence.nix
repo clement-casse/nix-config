@@ -33,10 +33,10 @@ _: {
   # 11: Launchpad           12: Notification Center
   # 13: Lock Screen         14: Quick Note
   system.defaults.dock = {
-    wvous-tl-corner = 1;  # Top Left Corner
+    wvous-tl-corner = 1; # Top Left Corner
     wvous-tr-corner = 12; # Top Right Corner
-    wvous-bl-corner = 1;  # Bottom Left Corner
-    wvous-br-corner = 1;  # Bottom Right Corner
+    wvous-bl-corner = 1; # Bottom Left Corner
+    wvous-br-corner = 1; # Bottom Right Corner
   };
 
   ## Traditional Window Manager options (i.e. not Stage manager)
