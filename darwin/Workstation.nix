@@ -13,15 +13,10 @@
   #security.pam.enableSudoTouchIdAuth = true;
 
   imports = [
-    ./modules/nix.nix
-    ./modules/shells.nix
-    ./modules/fonts.nix
-    ./modules/users.nix
-
-    ./modules/system-preferences/apparence.nix
-    ./modules/system-preferences/finder.nix
-    ./modules/system-preferences/keyboard.nix
-    ./modules/system-preferences/trackpad.nix
-    ./modules/system-preferences/menu-bar.nix
+    ./system-preferences/apparence.nix
+    ./system-preferences/finder.nix
+    ./system-preferences/keyboard.nix
+    ./system-preferences/trackpad.nix
+    ./system-preferences/menu-bar.nix
   ];
 }
