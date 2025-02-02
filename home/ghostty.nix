@@ -6,6 +6,7 @@ in
 {
   programs.ghostty = {
     enable = true;
+    package = if isDarwin then null else pkgs.ghostty; # On darwin GhostTTY is installed via Homebrew
     enableZshIntegration = true;
     enableBashIntegration = true;
     settings = mkMerge [

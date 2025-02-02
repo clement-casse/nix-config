@@ -37,7 +37,7 @@
       "/System/Applications/Photos.app"
       "${pkgs.vscode}/Applications/Visual Studio Code.app"
       "${pkgs.zed-editor}/Applications/Zed.app"
-      "${pkgs.ghostty}/Applications/Ghostty.app"
+      "/Applications/Ghostty.app"
       "/System/Applications/Passwords.app"
       "/System/Applications/App Store.app"
       "/System/Applications/System Settings.app"
