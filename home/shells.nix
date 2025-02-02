@@ -6,6 +6,7 @@
     enableVteIntegration = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
+    historySubstringSearch.enable = true;
     history = {
       expireDuplicatesFirst = true;
       ignoreDups = true;
