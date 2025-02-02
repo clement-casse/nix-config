@@ -34,8 +34,10 @@ in
       "window.autoDetectColorScheme" = true;
       "workbench.preferredDarkColorTheme" = "Nord";
       "workbench.preferredLightColorTheme" = "Ayu Light";
+
       "workbench.tips.enabled" = false;
       "extensions.ignoreRecommendations" = true;
+      "lldb.suppressUpdateNotifications" = true;
 
       "editor.fontSize" = 14;
       "editor.fontFamily" = "'JetBrainsMono Nerd Font Mono', Menlo, Monaco, 'Courier New', monospace";
