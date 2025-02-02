@@ -20,7 +20,6 @@ _: {
     "discord"
     "signal"
 
-    "nvidia-geforce-now"
     "steam"
   ];
 }

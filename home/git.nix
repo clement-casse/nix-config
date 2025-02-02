@@ -1,4 +1,8 @@
-{ pkgs, fullname, email, ... }: {
+{ pkgs, fullname, email, ... }: 
+let
+  inherit (pkgs.stdenv.hostPlatform) isDarwin;
+in
+{
   programs = {
     git = {
       enable = true;
@@ -10,6 +14,7 @@
         branch.sort = "-committerdate";
         core.autocrlf = "input";
         push.autoSetupRemote = true;
+        credential.helper = if isDarwin then "osxkeychain" else "store";
       };
     };
   };
