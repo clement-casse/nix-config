@@ -22,15 +22,22 @@ in
         window-height = 35;
         window-inherit-working-directory = true;
         window-step-resize = true;
+        window-padding-x = 12;
+        window-padding-y = 6;
       }
 
       (mkIf isDarwin {
-        macos-non-native-fullscreen = "visible-menu";
+        macos-non-native-fullscreen = false;
         initial-window = false;
         quick-terminal-position = "top";
-        quick-terminal-screen = "main";
+        quick-terminal-screen = "macos-menu-bar";
+        quick-terminal-autohide = true;
+        quick-terminal-space-behavior = "remain";
 
         keybind = "global:ctrl+f12=toggle_quick_terminal";
+
+        macos-auto-secure-input = true;
+        macos-titlebar-proxy-icon = "hidden";
       })
     ];
   };
