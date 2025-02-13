@@ -42,6 +42,7 @@
           modules = [
             ./common
             ./darwin/PowerBook.nix
+            (_: { ids.gids.nixbld = 30000; }) # Remove this on the next clean install
             mac-app-util.darwinModules.default
             home-manager.darwinModules.home-manager
             {

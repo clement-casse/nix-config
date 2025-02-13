@@ -4,9 +4,8 @@ let
 in
 with lib;
 {
-  services.nix-daemon.enable = true;
-
   nix = {
+    enable = true;
     gc.automatic = true;
     optimise.automatic = true;
     settings = {
