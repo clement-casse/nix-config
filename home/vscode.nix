@@ -69,6 +69,9 @@ in
       "rust-analyzer.checkOnSave" = true;
       "rust-analyzer.check.command" = "clippy";
       "rust-analyzer.inlayHints.closingBraceHints.enable" = false;
+      "rust-analyzer.testExplorer" = true;
+      "rust-analyzer.interpret.tests" = true;
+      "rust-analyzer.cargo.targetDir" = true;
 
       "go.inlayHints.assignVariableTypes" = true;
       "go.inlayHints.compositeLiteralFields" = true;
