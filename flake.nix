@@ -35,6 +35,20 @@
       };
     in
     {
+      homeConfigurations."${username}" = home-manager.lib.homeManagerConfiguration rec {
+        # nix run home-manager -- build --flake . --impure
+        pkgs = import nixpkgs {
+          system = builtins.currentSystem;
+          config.allowUnfree = true;
+        };
+        extraSpecialArgs = specialArgs // { system = builtins.currentSystem; };
+        modules = [
+          ./home
+        ] ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
+          mac-app-util.homeManagerModules.default
+        ];
+      };
+
       darwinConfigurations = {
         # $ nix run nix-darwin -- switch --flake ".#PowerBook" --impure
         "PowerBook" = nix-darwin.lib.darwinSystem {
