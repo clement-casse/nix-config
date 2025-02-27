@@ -10,7 +10,7 @@
   time.timeZone = "Europe/Paris";
 
   # Add ability to use TouchID for sudo authentication
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   imports = [
     ./apps/packages.nix
