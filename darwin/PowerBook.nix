@@ -19,7 +19,6 @@
 
     ./system-preferences/apparence.nix
     ./system-preferences/finder.nix
-    #./system-preferences/safari.nix
     ./system-preferences/keyboard.nix
     ./system-preferences/trackpad.nix
     ./system-preferences/menu-bar.nix
