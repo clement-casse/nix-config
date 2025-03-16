@@ -63,6 +63,7 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.verbose = true;
+              home-manager.backupFileExtension = "backup";
               home-manager.extraSpecialArgs = specialArgs // { system = "aarch64-darwin"; };
               home-manager.sharedModules = [ mac-app-util.homeManagerModules.default ];
               home-manager.users."${username}" = ./home;

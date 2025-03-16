@@ -6,7 +6,6 @@ in
   programs.vscode = {
     enable = true;
     package = pkgs.vscode;
-    mutableExtensionsDir = true; # Allow to install extensions by hand and not rerun nix-switch
     profiles.default = {
       extensions = with vscodeExtensions; [
         # Extensions
