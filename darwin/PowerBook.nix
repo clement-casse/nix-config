@@ -38,7 +38,6 @@
       "${pkgs.zed-editor}/Applications/Zed.app"
       "/Applications/Ghostty.app"
       "/System/Applications/Passwords.app"
-      "/System/Applications/App Store.app"
       "/System/Applications/System Settings.app"
     ];
     persistent-others = [
