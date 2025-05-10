@@ -1,7 +1,4 @@
-{ pkgs, lib, username, system, ... }:
-let
-  inherit (pkgs.stdenv.hostPlatform) isDarwin;
-in
+{ lib, username, system, ... }:
 with lib;
 {
   nix = {
