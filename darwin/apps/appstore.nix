@@ -3,7 +3,6 @@ _: {
   homebrew.masApps = {
     "Tailscale" = 1475387142;
     "The Unarchiver" = 425424353;
-    "reMarkable desktop" = 1276493162;
   };
 
   system.defaults.CustomUserPreferences = {

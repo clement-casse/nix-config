@@ -10,8 +10,8 @@ _: {
   };
 
   homebrew.casks = [
+    "cozy-drive"
     "ghostty"
-    "brave-browser"
     "orbstack"
     "netnewswire"
     "vlc"
