@@ -10,6 +10,7 @@ in
       extensions = with vscodeExtensions; [
         # Extensions
         mkhl.direnv
+        arturock.gitstash
         bbenoist.nix
         jnoortheen.nix-ide
         arrterian.nix-env-selector
@@ -22,6 +23,7 @@ in
         ms-vscode.live-server
         ryanluker.vscode-coverage-gutters
         zxh404.vscode-proto3
+        bufbuild.vscode-buf
         thenuprojectcontributors.vscode-nushell-lang
         golang.go
 
