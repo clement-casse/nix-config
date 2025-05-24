@@ -1,4 +1,5 @@
 { pkgs, inputs, system, username, ... }: {
+  system.primaryUser = "${username}";
   system.configurationRevision = inputs.rev or inputs.dirtyRev or null;
   system.stateVersion = 5;
   nixpkgs.hostPlatform = system;

@@ -12,8 +12,9 @@ _: {
   homebrew.casks = [
     "cozy-drive"
     "ghostty"
-    "orbstack"
     "netnewswire"
+    "orbstack"
+    "raindropio"
     "vlc"
     "zotero"
 

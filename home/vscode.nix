@@ -93,6 +93,10 @@ in
           "editor.rulers" = [ 100 ];
         };
 
+        "vs-kubernetes" = {
+          "vs-kubernetes.crd-code-completion" = "disabled";
+        };
+
         "chat.commandCenter.enabled" = false;
         "redhat.telemetry.enabled" = false;
       };
