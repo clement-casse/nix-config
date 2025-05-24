@@ -34,7 +34,7 @@ _: {
   # 13: Lock Screen         14: Quick Note
   system.defaults.dock = {
     wvous-tl-corner = 1; # Top Left Corner
-    wvous-tr-corner = 12; # Top Right Corner
+    wvous-tr-corner = 1; # Top Right Corner
     wvous-bl-corner = 1; # Bottom Left Corner
     wvous-br-corner = 1; # Bottom Right Corner
   };

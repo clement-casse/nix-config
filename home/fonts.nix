@@ -1,5 +1,8 @@
-{ pkgs, ... }: {
-  fonts.packages = with pkgs; [
+{ pkgs, ... }:
+{
+  fonts.fontconfig.enable = true;
+
+  home.packages = with pkgs; [
     dejavu_fonts
     source-sans-pro
     source-code-pro
