@@ -26,7 +26,7 @@
 
   outputs = inputs@{ self, nixpkgs, utils, nix-darwin, home-manager, nix-vscode-extensions, mac-app-util }:
     let
-      username = builtins.getEnv "USER";
+      username = "clement";
       fullname = "Clément Cassé";
       email = "clement.casse@proton.me";
 
@@ -50,7 +50,7 @@
       };
 
       darwinConfigurations = {
-        # $ nix run nix-darwin -- switch --flake ".#PowerBook" --impure
+        # $ sudo darwin-rebuild switch --flake ".#PowerBook"
         "PowerBook" = nix-darwin.lib.darwinSystem {
           specialArgs = specialArgs // { system = "aarch64-darwin"; };
           modules = [

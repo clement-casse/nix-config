@@ -19,7 +19,7 @@ in
         ms-kubernetes-tools.vscode-kubernetes-tools
         tamasfe.even-better-toml
         rust-lang.rust-analyzer
-        vadimcn.vscode-lldb
+        # vadimcn.vscode-lldb
         ms-vscode.live-server
         ryanluker.vscode-coverage-gutters
         zxh404.vscode-proto3
