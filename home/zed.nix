@@ -26,6 +26,12 @@
       load_direnv = "direct";
       ui_font_size = 16;
       buffer_font_size = 14;
+      relative_line_numbers = true;
+      soft_wrap = "editor_width";
+      indent_guides = {
+        enabled = true;
+        coloring = "indent_aware";
+      };
       inlay_hints = {
         enabled = true;
         show_type_hints = true;
@@ -35,18 +41,54 @@
       };
       git = {
         inline_blame.enabled = true;
+        inline_blame.delay_ms = 1000;
       };
       terminal = {
         font_family = "JetBrainsMono Nerd Font Mono";
         font_size = 12;
         line_height = "standard";
+        env.EDITOR = "zed --wait";
+      };
+      minimap = {
+        show = "auto";
+      };
+      icon_theme = {
+        mode = "system";
+        dark = "Zed (Default)";
+        light = "Zed (Default)";
       };
       languages = {
         Nix = {
           language_servers = [ "nil" "!nixd" ];
+          tab_size = 2;
         };
       };
+      lsp = {
+        nil = {
+          initialization_options = {
+            formatting.command = [ "nix" "fmt" ];
+          };
+          settings = {
+            diagnostics.ingored = [ ];
+          };
+        };
+      };
+      file_scan_exclusions = [
+        "**/.git"
+        "**/.svn"
+        "**/.hg"
+        "**/CVS"
+        "**/.DS_Store"
+        "**/Thumbs.db"
+        "**/.classpath"
+        "**/.settings"
+        "**/.vscode"
+        "**/.idea"
+        "**/.vscode-insiders"
+        "**/.direnv"
+      ];
       telemetry.metrics = false;
+      telemetry.diagnostics = false;
       language_models = {
         openai = {
           version = "1";
