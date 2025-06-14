@@ -3,6 +3,7 @@ _: {
   homebrew.masApps = {
     "Tailscale" = 1475387142;
     "The Unarchiver" = 425424353;
+    "Save to Raindrop.io" = 1549370672;
   };
 
   system.defaults.CustomUserPreferences = {

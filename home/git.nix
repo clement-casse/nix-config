@@ -25,4 +25,6 @@ in
       credential.helper = if isDarwin then "osxkeychain" else "store";
     };
   };
+
+  programs.mergiraf.enable = true;
 }
