@@ -15,17 +15,6 @@
     };
   };
 
-  programs.nushell = {
-    enable = true;
-    plugins = with pkgs.nushellPlugins; [
-      formats
-      query
-    ];
-    shellAliases = {
-      ll = "ls -l";
-    };
-  };
-
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
