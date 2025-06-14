@@ -1,8 +1,8 @@
 { lib, pkgs, ... }:
-with lib;
 let
   inherit (pkgs.stdenv.hostPlatform) isDarwin;
 in
+with lib;
 {
   programs.ghostty = {
     enable = true;
@@ -13,7 +13,7 @@ in
       {
         theme = "nord";
         font-size = 12;
-        font-family = "JetBrainsMono Nerd Font Mono";
+        font-family = "Iosevka Nerd Font Mono";
         mouse-scroll-multiplier = 10;
         background-opacity = 0.7;
         background-blur-radius = 20;

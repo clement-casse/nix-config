@@ -1,105 +1,197 @@
-{ pkgs, system, nix-vscode-extensions, ... }:
+{ pkgs, lib, system, nix-vscode-extensions, ... }:
 let
   vscodeExtensions = nix-vscode-extensions.extensions."${system}".vscode-marketplace;
+
+  # THEMES: install some themes
+  themes = with vscodeExtensions; [
+    # Light themes
+    teabyii.ayu
+
+    # Dark themes
+    arcticicestudio.nord-visual-studio-code
+    marlosirapuan.nord-deep
+    pmndrs.pmndrs
+  ];
+
+  # SHARED EXTENSIONS: a common base of extensions used in all profiles
+  shared.extensions = with vscodeExtensions; [
+    mkhl.direnv
+    bbenoist.nix
+    jnoortheen.nix-ide
+    arrterian.nix-env-selector
+    editorconfig.editorconfig
+
+    arturock.gitstash
+    waderyan.gitblame
+
+    ms-vscode.live-server
+    ms-azuretools.vscode-containers
+  ];
+
+  interfaceCustomization = {
+    "window.autoDetectColorScheme" = true;
+    "workbench.preferredDarkColorTheme" = "Nord";
+    "workbench.preferredLightColorTheme" = "Ayu Light Bordered";
+
+    "terminal.integrated.fontFamily" = "'Iosevka Nerd Font Mono', Menlo, Monaco, 'Courier New', monospace";
+    "editor.fontFamily" = "'Iosevka Nerd Font Mono', Menlo, Monaco, 'Courier New', monospace";
+    "editor.inlayHints.fontFamily" = "'Iosevka Nerd Font Mono Thin', Menlo, Monaco, 'Courier New', monospace";
+  };
+
+  # SHARED USER SETTINGS: a common base of all user settings that are used in all profiles
+  shared.userSettings = {
+    "workbench.tips.enabled" = false;
+    "extensions.ignoreRecommendations" = true;
+    "chat.commandCenter.enabled" = false;
+
+    "editor.fontSize" = 14;
+    "editor.fontLigatures" = true;
+    "editor.lineHeight" = 1.7;
+    "editor.renderControlCharacters" = true;
+    "editor.renderWhitespace" = "boundary";
+    "editor.guides.bracketPairs" = true;
+    "editor.inlayHints.padding" = true;
+    "editor.inlayHints.fontSize" = 10;
+    "editor.inlayHints.maximumLength" = 0;
+
+    "git.autofetch" = true;
+    "git.autoStash" = true;
+    "git.confirmSync" = false;
+
+    "gitblame.inlineMessageEnabled" = true;
+    "gitblame.inlineMessageFormat" = "\${author.name} (\${time.ago})";
+    "gitblame.delayBlame" = 600;
+
+    "diffEditor.ignoreTrimWhitespace" = true;
+
+    "nix.enableLanguageServer" = true;
+    "nixEnvSelector.useFlakes" = true;
+  };
+
+  # EXTENSIONS & USER SETTINGS for protobuf development.
+  protobuf = {
+    extensions = with vscodeExtensions; [
+      zxh404.vscode-proto3
+      bufbuild.vscode-buf
+    ];
+    userSettings = {
+      "[proto3]" = {
+        "editor.formatOnSave" = true;
+        "editor.tabSize" = 2;
+        "editor.rulers" = [ 80 ];
+      };
+    };
+  };
+
+  # EXTENSIONS & USER SETTINGS for kubernetes development.
+  kubernetes = {
+    extensions = with vscodeExtensions; [
+      redhat.vscode-yaml
+      ms-kubernetes-tools.vscode-kubernetes-tools
+    ];
+    userSettings = {
+      "vs-kubernetes" = {
+        "vs-kubernetes.crd-code-completion" = "disabled";
+      };
+
+      "redhat.telemetry.enabled" = false;
+    };
+  };
 in
 {
   programs.vscode = {
     enable = true;
     package = pkgs.vscode;
     profiles.default = {
-      extensions = with vscodeExtensions; [
-        # Extensions
-        mkhl.direnv
-        arturock.gitstash
-        bbenoist.nix
-        jnoortheen.nix-ide
-        arrterian.nix-env-selector
-        editorconfig.editorconfig
-        redhat.vscode-yaml
-        ms-kubernetes-tools.vscode-kubernetes-tools
+      enableExtensionUpdateCheck = true;
+      enableUpdateCheck = true;
+
+      extensions = themes ++ shared.extensions ++ protobuf.extensions ++ kubernetes.extensions;
+      userSettings = lib.mkMerge [
+        shared.userSettings
+        interfaceCustomization
+        protobuf.userSettings
+        kubernetes.userSettings
+      ];
+    };
+
+    profiles.Rust = {
+      extensions = with vscodeExtensions; themes ++ shared.extensions ++ protobuf.extensions ++ [
         tamasfe.even-better-toml
         rust-lang.rust-analyzer
         # vadimcn.vscode-lldb
-        ms-vscode.live-server
         ryanluker.vscode-coverage-gutters
-        zxh404.vscode-proto3
-        bufbuild.vscode-buf
-        thenuprojectcontributors.vscode-nushell-lang
-        golang.go
-
-        # Themes
-        teabyii.ayu
-        arcticicestudio.nord-visual-studio-code
+        masterustacean.cargo-runner
       ];
 
-      userSettings = {
-        "window.autoDetectColorScheme" = true;
-        "workbench.preferredDarkColorTheme" = "Nord";
-        "workbench.preferredLightColorTheme" = "Ayu Light";
+      userSettings = lib.mkMerge [
+        shared.userSettings
+        interfaceCustomization
+        protobuf.userSettings
+        {
+          "[rust]" = {
+            "editor.formatOnSave" = true;
+            "editor.defaultFormatter" = "rust-lang.rust-analyzer";
+            "editor.codeActionsOnSave" = {
+              "source.organizeImports" = "explicit";
+            };
+          };
+          "rust-analyzer.imports.group.enable" = true;
+          "rust-analyzer.checkOnSave" = true;
+          "rust-analyzer.check.command" = "clippy";
+          "rust-analyzer.inlayHints.closingBraceHints.enable" = false;
+          "rust-analyzer.testExplorer" = true;
+          "rust-analyzer.interpret.tests" = true;
+          "rust-analyzer.cargo.targetDir" = true;
+          "rust-analyzer.procMacro.enable" = true;
 
-        "workbench.tips.enabled" = false;
-        "extensions.ignoreRecommendations" = true;
-        "lldb.suppressUpdateNotifications" = true;
+          "debug.allowBreakpointsEverywhere" = true;
+          "lldb.suppressUpdateNotifications" = true;
+        }
+      ];
+    };
 
-        "editor.fontSize" = 14;
-        "editor.fontFamily" = "'JetBrainsMono Nerd Font Mono', Menlo, Monaco, 'Courier New', monospace";
-        "editor.fontLigatures" = true;
-        "editor.lineHeight" = 1.7;
-        "editor.renderControlCharacters" = true;
-        "editor.renderWhitespace" = "boundary";
-        "editor.guides.bracketPairs" = true;
-        "editor.inlayHints.fontFamily" = "'JetBrainsMono Nerd Font Mono Thin', Menlo, Monaco, 'Courier New', monospace";
-        "editor.inlayHints.padding" = true;
-        "editor.inlayHints.fontSize" = 10;
-        "editor.inlayHints.maximumLength" = 0;
+    profiles.Go = {
+      extensions = with vscodeExtensions; themes ++ shared.extensions ++ protobuf.extensions ++ kubernetes.extensions ++ [
+        golang.go
+      ];
 
-        "git.autofetch" = true;
-        "git.autoStash" = true;
-        "git.confirmSync" = false;
+      userSettings = lib.mkMerge [
+        shared.userSettings
+        interfaceCustomization
+        protobuf.userSettings
+        {
+          "go.inlayHints.assignVariableTypes" = true;
+          "go.inlayHints.compositeLiteralFields" = true;
+          "go.inlayHints.parameterNames" = true;
+          "go.inlayHints.rangeVariableTypes" = true;
+          "go.inlayHints.constantValues" = true;
+          "go.lintTool" = "golangci-lint";
+          "go.toolsManagement.autoUpdate" = true;
+        }
+      ];
+    };
 
-        "diffEditor.ignoreTrimWhitespace" = true;
+    profiles.Python = {
+      extensions = with vscodeExtensions; themes ++ shared.extensions ++ [
+        donjayamanne.python-extension-pack
+        tamasfe.even-better-toml
+        ms-toolsai.jupyter
+        charliermarsh.ruff
+      ];
 
-        "terminal.integrated.fontFamily" = "'JetBrainsMono Nerd Font Mono', Menlo, Monaco, 'Courier New', monospace";
-
-        "nix.enableLanguageServer" = true;
-
-        "[rust]" = {
-          "editor.formatOnSave" = true;
-          "editor.defaultFormatter" = "rust-lang.rust-analyzer";
-        };
-        "rust-analyzer.imports.group.enable" = true;
-        "rust-analyzer.checkOnSave" = true;
-        "rust-analyzer.check.command" = "clippy";
-        "rust-analyzer.inlayHints.closingBraceHints.enable" = false;
-        "rust-analyzer.testExplorer" = true;
-        "rust-analyzer.interpret.tests" = true;
-        "rust-analyzer.cargo.targetDir" = true;
-
-        "go.inlayHints.assignVariableTypes" = true;
-        "go.inlayHints.compositeLiteralFields" = true;
-        "go.inlayHints.parameterNames" = true;
-        "go.inlayHints.rangeVariableTypes" = true;
-        "go.inlayHints.constantValues" = true;
-        "go.lintTool" = "golangci-lint";
-        "go.toolsManagement.autoUpdate" = true;
-
-        "[proto3]" = {
-          "editor.formatOnSave" = true;
-          "editor.tabSize" = 2;
-          "editor.rulers" = [ 80 ];
-        };
-
-        "[python]" = {
-          "editor.rulers" = [ 100 ];
-        };
-
-        "vs-kubernetes" = {
-          "vs-kubernetes.crd-code-completion" = "disabled";
-        };
-
-        "chat.commandCenter.enabled" = false;
-        "redhat.telemetry.enabled" = false;
-      };
+      userSettings = lib.mkMerge [
+        shared.userSettings
+        interfaceCustomization
+        {
+          "[python]" = {
+            "editor.rulers" = [ 100 ];
+          };
+          "python.analysis.autoImportCompletions" = true;
+          "python.analysis.fixAll" = [ "source.unusedImports" ];
+          "editor.defaultFormatter" = "charliermarsh.ruff";
+        }
+      ];
     };
   };
 }
