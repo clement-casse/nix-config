@@ -33,9 +33,17 @@ let
     "workbench.preferredDarkColorTheme" = "Nord";
     "workbench.preferredLightColorTheme" = "Ayu Light Bordered";
 
-    "terminal.integrated.fontFamily" = "'Iosevka Nerd Font Mono', Menlo, Monaco, 'Courier New', monospace";
-    "editor.fontFamily" = "'Iosevka Nerd Font Mono', Menlo, Monaco, 'Courier New', monospace";
-    "editor.inlayHints.fontFamily" = "'Iosevka Nerd Font Mono Thin', Menlo, Monaco, 'Courier New', monospace";
+    "editor.fontFamily" = "'Monaspace Neon Frozen', Menlo, Monaco, 'Courier New', monospace";
+    "editor.fontSize" = 14;
+    "editor.fontVariations" = "'wght' 350";
+    "editor.lineHeight" = 1.7;
+    "editor.fontLigatures" = "'calt', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09', 'liga'";
+    "editor.inlayHints.fontFamily" = "'Monaspace Radon Frozen', Menlo, Monaco, 'Courier New', monospace";
+    "editor.inlayHints.fontSize" = 10;
+    "terminal.integrated.fontFamily" = "'Monaspace Krypton Frozen', Menlo, Monaco, 'Courier New', monospace";
+    "terminal.integrated.fontSize" = 12;
+    "terminal.integrated.fontWeight" = 500;
+	  "terminal.integrated.fontWeightBold" = 800;
   };
 
   # SHARED USER SETTINGS: a common base of all user settings that are used in all profiles
@@ -44,15 +52,12 @@ let
     "extensions.ignoreRecommendations" = true;
     "chat.commandCenter.enabled" = false;
 
-    "editor.fontSize" = 14;
-    "editor.fontLigatures" = true;
-    "editor.lineHeight" = 1.7;
     "editor.renderControlCharacters" = true;
     "editor.renderWhitespace" = "boundary";
     "editor.guides.bracketPairs" = true;
     "editor.inlayHints.padding" = true;
-    "editor.inlayHints.fontSize" = 10;
     "editor.inlayHints.maximumLength" = 0;
+    "editor.hover.delay" = 1000;
 
     "git.autofetch" = true;
     "git.autoStash" = true;
@@ -97,6 +102,14 @@ let
       "redhat.telemetry.enabled" = false;
     };
   };
+
+  work = {
+    extensions = with vscodeExtensions; [
+      gitlab.gitlab-workflow
+    ];
+    userSettings = {
+    };
+  };
 in
 {
   programs.vscode = {
@@ -106,7 +119,7 @@ in
       enableExtensionUpdateCheck = true;
       enableUpdateCheck = true;
 
-      extensions = themes ++ shared.extensions ++ protobuf.extensions ++ kubernetes.extensions;
+      extensions = themes ++ shared.extensions ++ protobuf.extensions ++ kubernetes.extensions ++ work.extensions;
       userSettings = lib.mkMerge [
         shared.userSettings
         interfaceCustomization

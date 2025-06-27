@@ -18,6 +18,5 @@ in
     ./ghostty.nix
     ./vscode.nix
     ./xdg.nix
-    ./zed.nix
   ];
 }

@@ -13,7 +13,7 @@ with lib;
       {
         theme = "nord";
         font-size = 12;
-        font-family = "Iosevka Nerd Font Mono";
+        font-family = "Monaspace Krypton";
         mouse-scroll-multiplier = 10;
         background-opacity = 0.7;
         background-blur-radius = 20;
