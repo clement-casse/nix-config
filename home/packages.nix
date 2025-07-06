@@ -4,5 +4,7 @@
     gnupg
     jq
     nil
+    kubectl
+    helm
   ];
 }

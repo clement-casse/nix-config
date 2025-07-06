@@ -10,7 +10,6 @@ _: {
   };
 
   homebrew.casks = [
-    "cozy-drive"
     "ghostty"
     "netnewswire"
     "orbstack"
