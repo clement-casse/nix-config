@@ -26,12 +26,12 @@ let
     arrterian.nix-env-selector
     editorconfig.editorconfig
 
-    arturock.gitstash
-    waderyan.gitblame
+    eamodio.gitlens
 
     ms-vscode.live-server
     ms-azuretools.vscode-containers
     jakeboone02.cypher-query-language
+    bierner.markdown-mermaid
   ];
 
   interfaceCustomization = {
@@ -47,6 +47,9 @@ let
     "editor.fontLigatures" = "'calt', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09', 'liga'";
     "editor.inlayHints.fontFamily" = "'Monaspace Radon Frozen', Menlo, Monaco, 'Courier New', monospace";
     "editor.inlayHints.fontSize" = 10;
+    "editor.lineNumbers" = "relative";
+    "gitlens.currentLine.fontFamily" = "'Monaspace Radon Frozen', Menlo, Monaco, 'Courier New', monospace";
+    "gitlens.currentLine.fontSize" = 10;
 
     "terminal.integrated.fontFamily" = "'Monaspace Krypton Frozen', Menlo, Monaco, 'Courier New', monospace";
     "terminal.integrated.fontSize" = 12;
@@ -122,11 +125,44 @@ let
     "git.autoStash" = true;
     "git.confirmSync" = false;
 
-    "gitblame.inlineMessageEnabled" = true;
-    "gitblame.inlineMessageFormat" = "\${author.name} (\${time.ago})";
-    "gitblame.delayBlame" = 600;
-
     "diffEditor.ignoreTrimWhitespace" = true;
+
+    "gitlens.views.commits.showStashes" = true;
+    "gitlens.currentLine.enabled" = true;
+    "gitlens.currentLine.format" = "\${author, }\${agoOrDate}\${' via  'pullRequest}\${ • message|50?}";
+    "gitlens.showWhatsNewAfterUpgrades" = false;
+    "gitlens.plusFeatures.enabled" = false;
+    "gitlens.launchpad.indicator.enabled" = false;
+    "gitlens.ai.enabled" = false;
+    "gitlens.telemetry.enabled" = false;
+    "gitlens.cloudPatches.enabled" = false;
+    "gitlens.hovers.autolinks.enabled" = false;
+    "gitlens.hovers.autolinks.enhanced" = false;
+    "gitlens.hovers.avatars" = false;
+    "gitlens.blame.avatars" = false;
+    "gitlens.graph.avatars" = false;
+    "gitlens.views.launchpad.avatars" = false;
+    "gitlens.views.commits.avatars" = false;
+    "gitlens.views.fileHistory.avatars" = false;
+    "gitlens.views.lineHistory.avatars" = false;
+    "gitlens.views.branches.avatars" = false;
+    "gitlens.views.tags.avatars" = false;
+    "gitlens.views.worktrees.avatars" = false;
+    "gitlens.views.searchAndCompare.avatars" = false;
+    "gitlens.views.scm.grouped.hiddenViews" =
+      {
+        "commits" = false;
+        "worktrees" = true;
+        "branches" = false;
+        "remotes" = false;
+        "stashes" = false;
+        "tags" = false;
+        "contributors" = false;
+        "repositories" = true;
+        "fileHistory" = false;
+        "launchpad" = false;
+        "searchAndCompare" = false;
+      };
 
     "nix.enableLanguageServer" = true;
     "nixEnvSelector.useFlakes" = true;
@@ -165,6 +201,7 @@ let
   work = {
     extensions = with vscodeExtensions; [
       gitlab.gitlab-workflow
+      sonarsource.sonarlint-vscode
     ];
     userSettings = {
       "gitlab.duoCodeSuggestions.enabled" = false;
@@ -186,15 +223,13 @@ in
       extensions = themes ++
         shared.extensions ++
         protobuf.extensions ++
-        kubernetes.extensions ++
-        work.extensions;
+        kubernetes.extensions;
 
       userSettings = lib.mkMerge [
         shared.userSettings
         interfaceCustomization
         protobuf.userSettings
         kubernetes.userSettings
-        work.userSettings
       ];
     };
 
@@ -287,6 +322,49 @@ in
           "python.analysis.autoImportCompletions" = true;
           "python.analysis.fixAll" = [ "source.unusedImports" ];
           "editor.defaultFormatter" = "charliermarsh.ruff";
+        }
+      ];
+    };
+
+    profiles."Rust@Work" = {
+      extensions = with vscodeExtensions;
+        themes ++
+        shared.extensions ++
+        protobuf.extensions ++
+        work.extensions ++
+        [
+          tamasfe.even-better-toml
+          rust-lang.rust-analyzer
+          pkgs.vscode-extensions.vadimcn.vscode-lldb
+          ryanluker.vscode-coverage-gutters
+          masterustacean.cargo-runner
+        ];
+
+      userSettings = lib.mkMerge [
+        shared.userSettings
+        interfaceCustomization
+        protobuf.userSettings
+        work.userSettings
+        {
+          "[rust]" = {
+            "editor.formatOnSave" = true;
+            "editor.rulers" = [ 80 100 ];
+            "editor.defaultFormatter" = "rust-lang.rust-analyzer";
+            "editor.codeActionsOnSave" = {
+              "source.organizeImports" = "explicit";
+            };
+          };
+          "rust-analyzer.imports.group.enable" = true;
+          "rust-analyzer.checkOnSave" = true;
+          "rust-analyzer.check.command" = "clippy";
+          "rust-analyzer.inlayHints.closingBraceHints.enable" = false;
+          "rust-analyzer.testExplorer" = true;
+          "rust-analyzer.interpret.tests" = true;
+          "rust-analyzer.cargo.targetDir" = true;
+          "rust-analyzer.procMacro.enable" = true;
+
+          "debug.allowBreakpointsEverywhere" = true;
+          "lldb.suppressUpdateNotifications" = true;
         }
       ];
     };
