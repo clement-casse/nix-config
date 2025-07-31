@@ -11,6 +11,7 @@ in
   programs.home-manager.enable = true;
 
   imports = [
+    ./firefox.nix
     ./fonts.nix
     ./shells.nix
     ./services.nix

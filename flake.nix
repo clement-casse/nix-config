@@ -22,16 +22,20 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "utils";
     };
+    firefox-addons = {
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, utils, nix-darwin, home-manager, nix-vscode-extensions, mac-app-util }:
+  outputs = inputs@{ self, nixpkgs, utils, nix-darwin, home-manager, nix-vscode-extensions, mac-app-util, firefox-addons }:
     let
       username = "clement";
       fullname = "Clément Cassé";
       email = "clement.casse@proton.me";
 
       specialArgs = {
-        inherit inputs username fullname email nix-vscode-extensions;
+        inherit inputs username fullname email nix-vscode-extensions firefox-addons;
       };
     in
     {

@@ -19,6 +19,7 @@ Some similar projects on GitHub from peoples having similar needs:
 - [`github.com/zmre/nix-config`](https://github.com/zmre/nix-config) a Nix config exposed as a flake design with MacOS in mind.
 - [`github.com/ryan4yin/nix-darwin-kickstarter`](https://github.com/ryan4yin/nix-darwin-kickstarter) shows a reference of some advanced uses of nix to configure macOS laptops.
 - [`codeberg.org/samuelsung/nixos-config`](https://codeberg.org/samuelsung/nixos-config) a complete and well-writen nix config.
+- [`llakala/nixos`](https://github.com/llakala/nixos/tree/main) has a nice firefox configuration.
 
 Other references regarding the content of the configuration:
 
