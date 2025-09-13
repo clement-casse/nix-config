@@ -11,6 +11,8 @@ in
       DisableTelemetry = true;
       DisableFirefoxStudies = true;
       DisableFirefoxScreenshots = true;
+      DisplayBookmarksToolbar = "newtab"; # alternatives: "always" or "never"
+      SearchBar = "unified";
 
       Homepage.StartPage = "previous-session";
 
@@ -70,8 +72,8 @@ in
       settings = {
         "browser.search.region" = "FR";
         "browser.search.isUS" = false;
-        # "distribution.searchplugins.defaultLocale" = "fr-FR";
-        # "general.useragent.locale" = "fr-FR";
+        "distribution.searchplugins.defaultLocale" = "fr-FR";
+        "general.useragent.locale" = "fr-FR";
 
         "browser.newtabpage.activity-stream.showSponsored" = false;
         "browser.newtabpage.activity-stream.showSponsoredCheckboxes" = false;
@@ -81,7 +83,9 @@ in
       };
 
       extensions.packages = with firefoxExtensions; [
-        
+        proton-pass
+        raindropio
+        sponsorblock
       ];
     };
   };

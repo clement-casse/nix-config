@@ -26,9 +26,13 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, utils, nix-darwin, home-manager, nix-vscode-extensions, mac-app-util, firefox-addons }:
+  outputs = inputs@{ self, nixpkgs, utils, nix-darwin, home-manager, nix-vscode-extensions, mac-app-util, firefox-addons, nixos-generators }:
     let
       username = "clement";
       fullname = "Clément Cassé";
@@ -68,25 +72,6 @@
               home-manager.useUserPackages = true;
               home-manager.verbose = true;
               home-manager.backupFileExtension = "backup";
-              home-manager.extraSpecialArgs = specialArgs // { system = "aarch64-darwin"; };
-              home-manager.sharedModules = [ mac-app-util.homeManagerModules.default ];
-              home-manager.users."${username}" = ./home;
-            }
-          ];
-        };
-
-        # $ nix run nix-darwin -- switch --flake ".#Workstation" --impure
-        "Workstation" = nix-darwin.lib.darwinSystem {
-          specialArgs = specialArgs // { system = "aarch64-darwin"; };
-          modules = [
-            ./common
-            ./darwin/Workstation.nix
-            mac-app-util.darwinModules.default
-            home-manager.darwinModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.verbose = true;
               home-manager.extraSpecialArgs = specialArgs // { system = "aarch64-darwin"; };
               home-manager.sharedModules = [ mac-app-util.homeManagerModules.default ];
               home-manager.users."${username}" = ./home;

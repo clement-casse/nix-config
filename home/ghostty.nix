@@ -27,7 +27,7 @@ with lib;
       }
 
       (mkIf isDarwin {
-        macos-non-native-fullscreen = false;
+        macos-non-native-fullscreen = true;
         initial-window = false;
         quick-terminal-position = "top";
         quick-terminal-screen = "macos-menu-bar";
