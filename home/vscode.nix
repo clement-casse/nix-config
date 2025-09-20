@@ -46,10 +46,8 @@ let
     "editor.inlayHints.fontFamily" = "'Monaspace Radon Frozen', Menlo, Monaco, 'Courier New', monospace";
     "editor.inlayHints.fontSize" = 10;
     "editor.lineNumbers" = "relative";
-    "gitlens.currentLine.fontFamily" = "'Monaspace Radon Frozen', Menlo, Monaco, 'Courier New', monospace";
-    "gitlens.currentLine.fontSize" = 10;
 
-    "terminal.integrated.fontFamily" = "'Monaspace Krypton', Menlo, Monaco, 'Courier New', monospace";
+    "terminal.integrated.fontFamily" = "'Monaspace Krypton Frozen', Menlo, Monaco, 'Courier New', monospace";
     "terminal.integrated.fontSize" = 12;
     "terminal.integrated.fontLigatures" = "'calt', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09', 'liga'";
     "terminal.integrated.fontWeight" = 500;
@@ -165,8 +163,8 @@ in
     enable = true;
     package = pkgs.vscode;
     profiles.default = {
-      enableExtensionUpdateCheck = true;
-      enableUpdateCheck = true;
+      enableExtensionUpdateCheck = false;
+      enableUpdateCheck = false;
 
       extensions = themes ++
         shared.extensions ++

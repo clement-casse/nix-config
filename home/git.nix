@@ -7,7 +7,22 @@ in
     enable = true;
     userName = fullname;
     userEmail = email;
-    ignores = [ "*~" "*.swp" ".DS_Store" ];
+    ignores = [
+      "*~"
+      "*.swp"
+      ".Trash-*"
+      "._*"
+      "*.DS_Store"
+      ".AppleDouble"
+      ".LSOverride"
+      ".DocumentRevisions-V100"
+      ".fseventsd"
+      ".Spotlight-V100"
+      ".TemporaryItems"
+      ".Trashes"
+      ".VolumeIcon.icns"
+      ".com.apple.timemachine.donotpresent"
+    ];
     extraConfig = {
       help.autocorrect = "prompt";
       init.defaultBranch = "main";

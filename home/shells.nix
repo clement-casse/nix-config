@@ -34,7 +34,7 @@
     enable = true;
     icons = "auto";
     git = true;
-    extraOptions = [ "--group-directories-first" "--links" "--header" "--git" "--classify" "-a"];
+    extraOptions = [ "--group-directories-first" "--links" "--header" "--git" "--classify" "-a" ];
     enableZshIntegration = true;
     enableBashIntegration = true;
     enableNushellIntegration = false;

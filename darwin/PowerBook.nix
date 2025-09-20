@@ -28,9 +28,9 @@
 
   system.defaults.dock = {
     persistent-apps = [
-      "/System/Applications/Launchpad.app"
+      "/System/Applications/Apps.app"
       "/System/Applications/Mail.app"
-      "/Applications/Safari.app"
+      "/System/Cryptexes/App/System/Applications/Safari.app"
       "/System/Applications/Calendar.app"
       "/System/Applications/Messages.app"
       "/System/Applications/Music.app"
