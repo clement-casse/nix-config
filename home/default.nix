@@ -11,6 +11,7 @@ in
   programs.home-manager.enable = true;
 
   imports = [
+    ./fabric.nix
     ./firefox.nix
     ./fonts.nix
     ./shells.nix

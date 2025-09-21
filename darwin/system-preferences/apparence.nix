@@ -9,6 +9,7 @@ _: {
 
     # Whether to automatically switch between light and dark mode. The default is false.
     AppleInterfaceStyleSwitchesAutomatically = true;
+    AppleIconAppearanceTheme = "ClearAutomatic";
     #AppleInterfaceStyle = "Dark"; # If AppleInterfaceStyleSwitchesAutomatically is false the Dark theme can be manually applied here.
     _HIHideMenuBar = false; # Whether to autohide the menu bar.
   };
