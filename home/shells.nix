@@ -55,5 +55,8 @@
     enableNushellIntegration = true;
   };
 
+  programs.jq.enable = true;
+  programs.ripgrep.enable = true;
+
   home.file.".hushlogin".text = "";
 }
