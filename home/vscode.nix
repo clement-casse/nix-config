@@ -110,6 +110,7 @@ let
     "workbench.tips.enabled" = false;
     "extensions.ignoreRecommendations" = true;
     "chat.commandCenter.enabled" = false;
+    "update.showReleaseNotes" = false;
 
     "editor.renderControlCharacters" = true;
     "editor.renderWhitespace" = "boundary";
@@ -157,6 +158,77 @@ let
       "redhat.telemetry.enabled" = false;
     };
   };
+
+  rust = {
+    extensions = with vscodeExtensions; [
+      tamasfe.even-better-toml
+      rust-lang.rust-analyzer
+      pkgs.vscode-extensions.vadimcn.vscode-lldb
+      ryanluker.vscode-coverage-gutters
+      masterustacean.cargo-runner
+    ];
+    userSettings = {
+      "[rust]" = {
+        "editor.formatOnSave" = true;
+        "editor.rulers" = [ 80 100 ];
+        "editor.defaultFormatter" = "rust-lang.rust-analyzer";
+        "editor.codeActionsOnSave" = {
+          "source.organizeImports" = "explicit";
+        };
+      };
+      "rust-analyzer.imports.group.enable" = true;
+      "rust-analyzer.checkOnSave" = true;
+      "rust-analyzer.check.command" = "clippy";
+      "rust-analyzer.inlayHints.closingBraceHints.enable" = false;
+      "rust-analyzer.testExplorer" = true;
+      "rust-analyzer.interpret.tests" = true;
+      "rust-analyzer.cargo.targetDir" = true;
+      "rust-analyzer.procMacro.enable" = true;
+
+      "debug.allowBreakpointsEverywhere" = true;
+      "lldb.suppressUpdateNotifications" = true;
+    };
+  };
+
+  typst = {
+    extensions = with vscodeExtensions; [ myriad-dreamin.tinymist ];
+    userSettings = {
+      "[typst]" = {
+        "editor.formatOnSave" = true;
+      };
+    };
+  };
+
+  go = {
+    extensions = with vscodeExtensions; [ golang.go ];
+    userSettings = {
+      "go.inlayHints.assignVariableTypes" = true;
+      "go.inlayHints.compositeLiteralFields" = true;
+      "go.inlayHints.parameterNames" = true;
+      "go.inlayHints.rangeVariableTypes" = true;
+      "go.inlayHints.constantValues" = true;
+      "go.lintTool" = "golangci-lint";
+      "go.toolsManagement.autoUpdate" = true;
+    };
+  };
+
+  python = {
+    extensions = with vscodeExtensions; [
+      donjayamanne.python-extension-pack
+      tamasfe.even-better-toml
+      ms-toolsai.jupyter
+      charliermarsh.ruff
+    ];
+    userSettings = {
+      "[python]" = {
+        "editor.rulers" = [ 100 ];
+      };
+      "python.analysis.autoImportCompletions" = true;
+      "python.analysis.fixAll" = [ "source.unusedImports" ];
+      "editor.defaultFormatter" = "charliermarsh.ruff";
+    };
+  };
+
 in
 {
   programs.vscode = {
@@ -166,109 +238,24 @@ in
       enableExtensionUpdateCheck = false;
       enableUpdateCheck = false;
 
-      extensions = themes ++
-        shared.extensions ++
-        protobuf.extensions ++
-        kubernetes.extensions;
+      extensions = themes
+        ++ shared.extensions
+        ++ protobuf.extensions
+        ++ kubernetes.extensions
+        ++ rust.extensions
+        ++ typst.extensions
+        ++ go.extensions
+        ++ python.extensions;
 
       userSettings = lib.mkMerge [
         shared.userSettings
         interfaceCustomization
         protobuf.userSettings
         kubernetes.userSettings
-      ];
-    };
-
-    profiles.Rust = {
-      extensions = with vscodeExtensions;
-        themes ++
-        shared.extensions ++
-        protobuf.extensions ++
-        [
-          tamasfe.even-better-toml
-          rust-lang.rust-analyzer
-          pkgs.vscode-extensions.vadimcn.vscode-lldb
-          ryanluker.vscode-coverage-gutters
-          masterustacean.cargo-runner
-        ];
-
-      userSettings = lib.mkMerge [
-        shared.userSettings
-        interfaceCustomization
-        protobuf.userSettings
-        {
-          "[rust]" = {
-            "editor.formatOnSave" = true;
-            "editor.rulers" = [ 80 100 ];
-            "editor.defaultFormatter" = "rust-lang.rust-analyzer";
-            "editor.codeActionsOnSave" = {
-              "source.organizeImports" = "explicit";
-            };
-          };
-          "rust-analyzer.imports.group.enable" = true;
-          "rust-analyzer.checkOnSave" = true;
-          "rust-analyzer.check.command" = "clippy";
-          "rust-analyzer.inlayHints.closingBraceHints.enable" = false;
-          "rust-analyzer.testExplorer" = true;
-          "rust-analyzer.interpret.tests" = true;
-          "rust-analyzer.cargo.targetDir" = true;
-          "rust-analyzer.procMacro.enable" = true;
-
-          "debug.allowBreakpointsEverywhere" = true;
-          "lldb.suppressUpdateNotifications" = true;
-        }
-      ];
-    };
-
-    profiles.Go = {
-      extensions = with vscodeExtensions;
-        themes ++
-        shared.extensions ++
-        protobuf.extensions ++
-        kubernetes.extensions ++
-        [
-          golang.go
-        ];
-
-      userSettings = lib.mkMerge [
-        shared.userSettings
-        interfaceCustomization
-        protobuf.userSettings
-        kubernetes.userSettings
-        {
-          "go.inlayHints.assignVariableTypes" = true;
-          "go.inlayHints.compositeLiteralFields" = true;
-          "go.inlayHints.parameterNames" = true;
-          "go.inlayHints.rangeVariableTypes" = true;
-          "go.inlayHints.constantValues" = true;
-          "go.lintTool" = "golangci-lint";
-          "go.toolsManagement.autoUpdate" = true;
-        }
-      ];
-    };
-
-    profiles.Python = {
-      extensions = with vscodeExtensions;
-        themes ++
-        shared.extensions ++
-        [
-          donjayamanne.python-extension-pack
-          tamasfe.even-better-toml
-          ms-toolsai.jupyter
-          charliermarsh.ruff
-        ];
-
-      userSettings = lib.mkMerge [
-        shared.userSettings
-        interfaceCustomization
-        {
-          "[python]" = {
-            "editor.rulers" = [ 100 ];
-          };
-          "python.analysis.autoImportCompletions" = true;
-          "python.analysis.fixAll" = [ "source.unusedImports" ];
-          "editor.defaultFormatter" = "charliermarsh.ruff";
-        }
+        rust.userSettings
+        typst.userSettings
+        go.userSettings
+        python.userSettings
       ];
     };
   };
