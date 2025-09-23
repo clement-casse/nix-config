@@ -11,15 +11,11 @@ _: {
 
   homebrew.casks = [
     "ghostty"
-    "netnewswire"
     "orbstack"
     "raindropio"
     "vlc"
-    "zotero"
 
     "discord"
     "signal"
-
-    "steam"
   ];
 }
