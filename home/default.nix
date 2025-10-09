@@ -14,10 +14,12 @@ in
     ./fabric.nix
     ./firefox.nix
     ./fonts.nix
-    ./shells.nix
-    ./services.nix
-    ./git.nix
     ./ghostty.nix
+    ./git.nix
+    ./jujutsu.nix
+    ./packages.nix
+    ./services.nix
+    ./shells.nix
     ./vscode.nix
     ./xdg.nix
   ];

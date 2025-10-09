@@ -14,7 +14,6 @@
   security.pam.services.sudo_local.touchIdAuth = true;
 
   imports = [
-    ./apps/packages.nix
     ./apps/homebrew.nix
     ./apps/appstore.nix
 

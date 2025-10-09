@@ -1,6 +1,12 @@
-{ pkgs, lib, system, nix-vscode-extensions, ... }:
+{ pkgs, inputs, lib, system, nix-vscode-extensions, ... }:
 let
-  vscodeExtensions = nix-vscode-extensions.extensions."${system}".vscode-marketplace;
+  extensions = import inputs.nixpkgs {
+    inherit system;
+    # Uncomment to allow unfree extensions
+    config.allowUnfree = true;
+    overlays = [ nix-vscode-extensions.overlays.default ];
+  };
+  vscodeExtensions = extensions.vscode-marketplace;
 
   # THEMES: install some themes
   themes = with vscodeExtensions; [
@@ -18,19 +24,47 @@ let
     yummygum.city-lights-icon-vsc
   ];
 
-  # SHARED EXTENSIONS: a common base of extensions used in all profiles
-  shared.extensions = with vscodeExtensions; [
-    mkhl.direnv
-    bbenoist.nix
-    jnoortheen.nix-ide
-    arrterian.nix-env-selector
-    editorconfig.editorconfig
+  shared = {
+    # SHARED EXTENSIONS: a common base of extensions used in all profiles
+    extensions = with vscodeExtensions; [
+      mkhl.direnv
+      bbenoist.nix
+      jnoortheen.nix-ide
+      arrterian.nix-env-selector
+      editorconfig.editorconfig
+      visualjj.visualjj
 
-    ms-vscode.live-server
-    ms-azuretools.vscode-containers
-    neo4j-extensions.neo4j-for-vscode
-    bierner.markdown-mermaid
-  ];
+      ms-vscode.live-server
+      ms-azuretools.vscode-containers
+      neo4j-extensions.neo4j-for-vscode
+      bierner.markdown-mermaid
+    ];
+
+    # SHARED USER SETTINGS: a common base of all user settings that are used in all profiles
+    userSettings = {
+      "workbench.tips.enabled" = false;
+      "extensions.ignoreRecommendations" = true;
+      "chat.commandCenter.enabled" = false;
+      "update.showReleaseNotes" = false;
+      "explorer.confirmDragAndDrop" = false;
+
+      "editor.renderControlCharacters" = true;
+      "editor.renderWhitespace" = "boundary";
+      "editor.guides.bracketPairs" = true;
+      "editor.inlayHints.padding" = true;
+      "editor.inlayHints.maximumLength" = 0;
+      "editor.hover.delay" = 1000;
+
+      "git.autofetch" = true;
+      "git.autoStash" = true;
+      "git.confirmSync" = false;
+
+      "diffEditor.ignoreTrimWhitespace" = true;
+
+      "nix.enableLanguageServer" = true;
+      "nixEnvSelector.useFlakes" = true;
+    };
+  };
 
   interfaceCustomization = {
     "window.autoDetectColorScheme" = lib.mkDefault true;
@@ -105,30 +139,6 @@ let
     };
   };
 
-  # SHARED USER SETTINGS: a common base of all user settings that are used in all profiles
-  shared.userSettings = {
-    "workbench.tips.enabled" = false;
-    "extensions.ignoreRecommendations" = true;
-    "chat.commandCenter.enabled" = false;
-    "update.showReleaseNotes" = false;
-
-    "editor.renderControlCharacters" = true;
-    "editor.renderWhitespace" = "boundary";
-    "editor.guides.bracketPairs" = true;
-    "editor.inlayHints.padding" = true;
-    "editor.inlayHints.maximumLength" = 0;
-    "editor.hover.delay" = 1000;
-
-    "git.autofetch" = true;
-    "git.autoStash" = true;
-    "git.confirmSync" = false;
-
-    "diffEditor.ignoreTrimWhitespace" = true;
-
-    "nix.enableLanguageServer" = true;
-    "nixEnvSelector.useFlakes" = true;
-  };
-
   # EXTENSIONS & USER SETTINGS for protobuf development.
   protobuf = {
     extensions = with vscodeExtensions; [
@@ -160,13 +170,13 @@ let
   };
 
   rust = {
-    extensions = with vscodeExtensions; [
+    extensions = (with vscodeExtensions; [
       tamasfe.even-better-toml
       rust-lang.rust-analyzer
-      pkgs.vscode-extensions.vadimcn.vscode-lldb
       ryanluker.vscode-coverage-gutters
       masterustacean.cargo-runner
-    ];
+      vadimcn.vscode-lldb
+    ]);
     userSettings = {
       "[rust]" = {
         "editor.formatOnSave" = true;

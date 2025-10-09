@@ -1,9 +1,11 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
-    git
-    gnupg
-    nil
+    curl
+    gettext
     kubectl
-    helm
+    nil
+    uv
+    vim
+    wget
   ];
 }
