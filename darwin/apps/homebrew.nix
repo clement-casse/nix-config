@@ -10,6 +10,7 @@ _: {
   };
 
   homebrew.casks = [
+    "firefox"
     "ghostty"
     "orbstack"
     "raindropio"

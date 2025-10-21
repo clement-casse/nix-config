@@ -3,10 +3,8 @@
     enable = true;
 
     settings = {
-      user = {
-        name = fullname;
-        email = email;
-      };
+      user.name = fullname;
+      user.email = email;
     };
   };
 }

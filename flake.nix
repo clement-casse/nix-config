@@ -43,6 +43,10 @@
       };
     in
     {
+      nixosModules = {
+
+      };
+
       homeConfigurations."${username}" = home-manager.lib.homeManagerConfiguration rec {
         # nix run home-manager -- build --flake . --impure
         pkgs = import nixpkgs {
