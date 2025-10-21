@@ -7,5 +7,9 @@
     uv
     vim
     wget
+
+    buf
+    grpcurl
+    grpcui
   ];
 }

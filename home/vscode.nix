@@ -1,12 +1,19 @@
-{ pkgs, inputs, lib, system, nix-vscode-extensions, ... }:
+{ pkgs, inputs, lib, system, ... }:
 let
-  extensions = import inputs.nixpkgs {
+  vscodeExtensions = (import inputs.nixpkgs {
     inherit system;
-    # Uncomment to allow unfree extensions
     config.allowUnfree = true;
-    overlays = [ nix-vscode-extensions.overlays.default ];
-  };
-  vscodeExtensions = extensions.vscode-marketplace;
+    overlays = [
+      inputs.nix-vscode-extensions.overlays.default
+    ];
+  }).vscode-marketplace;
+
+  vscodeExtensionsFrozen = (import inputs.nixpkgs-frozen {
+    inherit system;
+    overlays = [
+      inputs.nix-vscode-extensions-frozen.overlays.default
+    ];
+  }).vscode-marketplace;
 
   # THEMES: install some themes
   themes = with vscodeExtensions; [
@@ -89,6 +96,7 @@ let
 
     "files.exclude" = {
       "**/.direnv/" = true;
+      "**/.jj/" = true;
     };
     "explorer.sortOrder" = "type";
     "workbench.tree.indent" = 12;
@@ -154,29 +162,16 @@ let
     };
   };
 
-  # EXTENSIONS & USER SETTINGS for kubernetes development.
-  kubernetes = {
-    extensions = with vscodeExtensions; [
-      redhat.vscode-yaml
-      ms-kubernetes-tools.vscode-kubernetes-tools
-    ];
-    userSettings = {
-      "vs-kubernetes" = {
-        "vs-kubernetes.crd-code-completion" = "disabled";
-      };
-
-      "redhat.telemetry.enabled" = false;
-    };
-  };
-
   rust = {
     extensions = (with vscodeExtensions; [
       tamasfe.even-better-toml
       rust-lang.rust-analyzer
       ryanluker.vscode-coverage-gutters
       masterustacean.cargo-runner
+      mitsuhiko.insta
+    ]) ++ (with vscodeExtensionsFrozen; [
       vadimcn.vscode-lldb
-    ]);
+    ]) ;
     userSettings = {
       "[rust]" = {
         "editor.formatOnSave" = true;
@@ -232,10 +227,10 @@ let
     userSettings = {
       "[python]" = {
         "editor.rulers" = [ 100 ];
+        "editor.defaultFormatter" = "charliermarsh.ruff";
       };
       "python.analysis.autoImportCompletions" = true;
       "python.analysis.fixAll" = [ "source.unusedImports" ];
-      "editor.defaultFormatter" = "charliermarsh.ruff";
     };
   };
 
@@ -251,7 +246,6 @@ in
       extensions = themes
         ++ shared.extensions
         ++ protobuf.extensions
-        ++ kubernetes.extensions
         ++ rust.extensions
         ++ typst.extensions
         ++ go.extensions
@@ -261,7 +255,6 @@ in
         shared.userSettings
         interfaceCustomization
         protobuf.userSettings
-        kubernetes.userSettings
         rust.userSettings
         typst.userSettings
         go.userSettings

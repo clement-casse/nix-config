@@ -12,7 +12,7 @@ in
 
   imports = [
     ./fabric.nix
-    ./firefox.nix
+    #./firefox.nix
     ./fonts.nix
     ./ghostty.nix
     ./git.nix

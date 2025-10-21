@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs-frozen.url = "github:NixOS/nixpkgs/cab778239e705082fe97bb4990e0d24c50924c04";
     utils.url = "github:numtide/flake-utils";
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
@@ -12,34 +13,33 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-vscode-extensions = {
-      url = "github:nix-community/nix-vscode-extensions";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "utils";
-    };
     mac-app-util = {
       url = "github:hraban/mac-app-util";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "utils";
     };
+    nix-vscode-extensions = {
+      url = "github:nix-community/nix-vscode-extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-vscode-extensions-frozen = {
+      url = "github:nix-community/nix-vscode-extensions/c55175e19f142be0330b2579d7da043d2f22e324";
+      inputs.nixpkgs.follows = "nixpkgs-frozen";
+    };
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixos-generators = {
-      url = "github:nix-community/nixos-generators";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = inputs@{ self, nixpkgs, utils, nix-darwin, home-manager, nix-vscode-extensions, mac-app-util, firefox-addons, nixos-generators }:
+  outputs = inputs@{ nixpkgs, utils, nix-darwin, home-manager, mac-app-util, ... }:
     let
       username = "clement";
       fullname = "Clément Cassé";
       email = "clement.casse@proton.me";
 
       specialArgs = {
-        inherit inputs username fullname email nix-vscode-extensions firefox-addons;
+        inherit inputs username fullname email;
       };
     in
     {

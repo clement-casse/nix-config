@@ -1,6 +1,6 @@
-{ pkgs, system, firefox-addons, ... }:
+{ pkgs, inputs, system, ... }:
 let
-  firefoxExtensions = firefox-addons.packages."${system}";
+  firefoxExtensions = inputs.firefox-addons.packages."${system}";
 in
 {
   programs.firefox = {

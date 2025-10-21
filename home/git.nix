@@ -5,8 +5,24 @@ in
 {
   programs.git = {
     enable = true;
-    userName = fullname;
-    userEmail = email;
+    settings = {
+      user.name = fullname;
+      user.email = email;
+      help.autocorrect = "prompt";
+      init.defaultBranch = "main";
+      branch.sort = "-committerdate";
+      tag.sort = "version:refname";
+      core.autocrlf = "input";
+      push.autoSetupRemote = true;
+      push.followTags = true;
+      fetch.prune = true;
+      fetch.pruneTags = true;
+      fetch.all = true;
+      rebase.autoSquash = true;
+      rebase.autoStash = true;
+      rebase.updateRefs = true;
+      credential.helper = if isDarwin then "osxkeychain" else "store";
+    };
     ignores = [
       "*~"
       "*.swp"
@@ -25,22 +41,6 @@ in
       ".jj"
       ".direnv"
     ];
-    extraConfig = {
-      help.autocorrect = "prompt";
-      init.defaultBranch = "main";
-      branch.sort = "-committerdate";
-      tag.sort = "version:refname";
-      core.autocrlf = "input";
-      push.autoSetupRemote = true;
-      push.followTags = true;
-      fetch.prune = true;
-      fetch.pruneTags = true;
-      fetch.all = true;
-      rebase.autoSquash = true;
-      rebase.autoStash = true;
-      rebase.updateRefs = true;
-      credential.helper = if isDarwin then "osxkeychain" else "store";
-    };
   };
 
   programs.mergiraf.enable = true;
