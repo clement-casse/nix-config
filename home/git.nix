@@ -22,6 +22,8 @@ in
       ".Trashes"
       ".VolumeIcon.icns"
       ".com.apple.timemachine.donotpresent"
+      ".jj"
+      ".direnv"
     ];
     extraConfig = {
       help.autocorrect = "prompt";
