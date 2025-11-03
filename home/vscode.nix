@@ -6,17 +6,10 @@ let
     overlays = [
       inputs.nix-vscode-extensions.overlays.default
     ];
-  }).vscode-marketplace;
-
-  vscodeExtensionsFrozen = (import inputs.nixpkgs-frozen {
-    inherit system;
-    overlays = [
-      inputs.nix-vscode-extensions-frozen.overlays.default
-    ];
-  }).vscode-marketplace;
+  });
 
   # THEMES: install some themes
-  themes = with vscodeExtensions; [
+  themes = with vscodeExtensions.vscode-marketplace; [
     # Light themes
     teabyii.ayu
 
@@ -33,19 +26,25 @@ let
 
   shared = {
     # SHARED EXTENSIONS: a common base of extensions used in all profiles
-    extensions = with vscodeExtensions; [
+    extensions = (with vscodeExtensions.vscode-marketplace; [
       mkhl.direnv
       bbenoist.nix
       jnoortheen.nix-ide
       arrterian.nix-env-selector
       editorconfig.editorconfig
       visualjj.visualjj
+      formulahendry.code-runner
+      usernamehw.errorlens
+      # igorsbitnev.error-gutters
+      # rodrigocfd.format-comment
+      # ryanluker.vscode-coverage-gutters
+      bierner.markdown-mermaid
 
+      neo4j-extensions.neo4j-for-vscode
+    ]) ++ (with vscodeExtensions.vscode-marketplace-release-universal; [
       ms-vscode.live-server
       ms-azuretools.vscode-containers
-      neo4j-extensions.neo4j-for-vscode
-      bierner.markdown-mermaid
-    ];
+    ]);
 
     # SHARED USER SETTINGS: a common base of all user settings that are used in all profiles
     userSettings = {
@@ -79,16 +78,16 @@ let
     "workbench.preferredLightColorTheme" = lib.mkDefault "Ayu Light Bordered";
     "workbench.iconTheme" = lib.mkDefault "ayu";
 
-    "editor.fontFamily" = "'Monaspace Neon Frozen', Menlo, Monaco, 'Courier New', monospace";
+    "editor.fontFamily" = "'Monaspace Neon', Menlo, Monaco, 'Courier New', monospace";
     "editor.fontSize" = 14;
     "editor.fontVariations" = "'wght' 350";
     "editor.lineHeight" = 1.7;
     "editor.fontLigatures" = "'calt', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09', 'liga'";
-    "editor.inlayHints.fontFamily" = "'Monaspace Radon Frozen', Menlo, Monaco, 'Courier New', monospace";
+    "editor.inlayHints.fontFamily" = "'Monaspace Radon', Menlo, Monaco, 'Courier New', monospace";
     "editor.inlayHints.fontSize" = 10;
     "editor.lineNumbers" = "relative";
 
-    "terminal.integrated.fontFamily" = "'Monaspace Krypton Frozen', Menlo, Monaco, 'Courier New', monospace";
+    "terminal.integrated.fontFamily" = "'Monaspace Krypton', Menlo, Monaco, 'Courier New', monospace";
     "terminal.integrated.fontSize" = 12;
     "terminal.integrated.fontLigatures" = "'calt', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09', 'liga'";
     "terminal.integrated.fontWeight" = 500;
@@ -149,7 +148,7 @@ let
 
   # EXTENSIONS & USER SETTINGS for protobuf development.
   protobuf = {
-    extensions = with vscodeExtensions; [
+    extensions = with vscodeExtensions.vscode-marketplace; [
       zxh404.vscode-proto3
       bufbuild.vscode-buf
     ];
@@ -163,13 +162,12 @@ let
   };
 
   rust = {
-    extensions = (with vscodeExtensions; [
+    extensions = (with vscodeExtensions.vscode-marketplace; [
       tamasfe.even-better-toml
       rust-lang.rust-analyzer
-      ryanluker.vscode-coverage-gutters
       masterustacean.cargo-runner
       mitsuhiko.insta
-    ]) ++ (with vscodeExtensionsFrozen; [
+    ]) ++ (with vscodeExtensions.vscode-marketplace-release-universal; [
       vadimcn.vscode-lldb
     ]) ;
     userSettings = {
@@ -196,7 +194,7 @@ let
   };
 
   typst = {
-    extensions = with vscodeExtensions; [ myriad-dreamin.tinymist ];
+    extensions = with vscodeExtensions.vscode-marketplace; [ myriad-dreamin.tinymist ];
     userSettings = {
       "[typst]" = {
         "editor.formatOnSave" = true;
@@ -205,25 +203,50 @@ let
   };
 
   go = {
-    extensions = with vscodeExtensions; [ golang.go ];
+    extensions = (with vscodeExtensions.vscode-marketplace-release-universal; [ 
+      golang.go
+    ]) ++ [vscodeExtensions.vscode-marketplace."766b"."go-outliner"];
     userSettings = {
+      "go.toolsManagement.autoUpdate" = true;
+      "go.useLanguageServer" = true;
+      "go.lintTool" = "golangci-lint";
+      "go.lintFlags" = [ "--fast" "--timeout" "5m" "--fix" ];
+      "go.addTags" = {
+        "tags" = "json";
+        "options" = "json=omitempty";
+        "promptForTags" = false;
+        "transform" = "snakecase";
+      };
+      "go.enableCodeLens" = {
+        "runtest" = true;
+      };
+      "[go]" = {
+        "editor.insertSpaces" = false;
+        "editor.formatOnSave" = true;
+        "editor.formatOnSaveMode" = "file";
+        "editor.stickyScroll.enabled" = true;
+        "editor.codeActionsOnSave" = {
+          "source.organizeImports" = "always";
+          "source.fixAll" = "always";
+        };
+      };
       "go.inlayHints.assignVariableTypes" = true;
       "go.inlayHints.compositeLiteralFields" = true;
+      "go.inlayHints.compositeLiteralTypes" = true;
       "go.inlayHints.parameterNames" = true;
       "go.inlayHints.rangeVariableTypes" = true;
       "go.inlayHints.constantValues" = true;
-      "go.lintTool" = "golangci-lint";
-      "go.toolsManagement.autoUpdate" = true;
     };
   };
 
   python = {
-    extensions = with vscodeExtensions; [
+    extensions = (with vscodeExtensions.vscode-marketplace-release-universal; [
       donjayamanne.python-extension-pack
-      tamasfe.even-better-toml
       ms-toolsai.jupyter
+    ]) ++ (with vscodeExtensions.vscode-marketplace; [
       charliermarsh.ruff
-    ];
+      tamasfe.even-better-toml
+    ]);
     userSettings = {
       "[python]" = {
         "editor.rulers" = [ 100 ];

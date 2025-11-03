@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixpkgs-frozen.url = "github:NixOS/nixpkgs/cab778239e705082fe97bb4990e0d24c50924c04";
     utils.url = "github:numtide/flake-utils";
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
@@ -20,14 +19,6 @@
     };
     nix-vscode-extensions = {
       url = "github:nix-community/nix-vscode-extensions";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nix-vscode-extensions-frozen = {
-      url = "github:nix-community/nix-vscode-extensions/c55175e19f142be0330b2579d7da043d2f22e324";
-      inputs.nixpkgs.follows = "nixpkgs-frozen";
-    };
-    firefox-addons = {
-      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
