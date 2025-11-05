@@ -27,7 +27,7 @@ with lib;
       }
 
       (mkIf isDarwin {
-        macos-non-native-fullscreen = true;
+        macos-non-native-fullscreen = "padded-notch";
         initial-window = false;
         quick-terminal-position = "top";
         quick-terminal-screen = "macos-menu-bar";
@@ -38,6 +38,7 @@ with lib;
 
         macos-auto-secure-input = true;
         macos-titlebar-proxy-icon = "hidden";
+        macos-shortcuts = "allow";
       })
     ];
   };

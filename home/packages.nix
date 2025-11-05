@@ -2,6 +2,7 @@
   home.packages = with pkgs; [
     curl
     gettext
+    htop
     kubectl
     nil
     uv
