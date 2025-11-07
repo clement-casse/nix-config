@@ -5,7 +5,6 @@
     htop
     kubectl
     nil
-    uv
     vim
     wget
 

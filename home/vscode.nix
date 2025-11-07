@@ -162,14 +162,14 @@ let
   };
 
   rust = {
-    extensions = (with vscodeExtensions.vscode-marketplace; [
+    extensions = (with vscodeExtensions.vscode-marketplace-release-universal; [
+      vadimcn.vscode-lldb
+    ]) ++ (with vscodeExtensions.vscode-marketplace; [
       tamasfe.even-better-toml
       rust-lang.rust-analyzer
       masterustacean.cargo-runner
       mitsuhiko.insta
-    ]) ++ (with vscodeExtensions.vscode-marketplace-release-universal; [
-      vadimcn.vscode-lldb
-    ]) ;
+    ]);
     userSettings = {
       "[rust]" = {
         "editor.formatOnSave" = true;

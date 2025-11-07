@@ -19,6 +19,7 @@ in
     ./packages.nix
     ./services.nix
     ./shells.nix
+    ./python.nix
     ./vscode.nix
     ./xdg.nix
   ];
