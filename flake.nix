@@ -12,18 +12,17 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    mac-app-util = {
-      url = "github:hraban/mac-app-util";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "utils";
-    };
     nix-vscode-extensions = {
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-vscode-extensions-frozen = {
+      url = "github:nix-community/nix-vscode-extensions/f662f854e901ca849f1833cc438c53653cdf94a3";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ nixpkgs, utils, nix-darwin, home-manager, mac-app-util, ... }:
+  outputs = inputs@{ nixpkgs, utils, nix-darwin, home-manager, ... }:
     let
       username = "clement";
       fullname = "Clément Cassé";
@@ -38,7 +37,7 @@
 
       };
 
-      homeConfigurations."${username}" = home-manager.lib.homeManagerConfiguration rec {
+      homeConfigurations."${username}" = home-manager.lib.homeManagerConfiguration {
         # nix run home-manager -- build --flake . --impure
         pkgs = import nixpkgs {
           system = builtins.currentSystem;
@@ -47,8 +46,6 @@
         extraSpecialArgs = specialArgs // { system = builtins.currentSystem; };
         modules = [
           ./home
-        ] ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
-          mac-app-util.homeManagerModules.default
         ];
       };
 
@@ -60,7 +57,6 @@
             ./common
             ./darwin/PowerBook.nix
             (_: { ids.gids.nixbld = 30000; }) # Remove this on the next clean install
-            mac-app-util.darwinModules.default
             home-manager.darwinModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
@@ -68,7 +64,6 @@
               home-manager.verbose = true;
               home-manager.backupFileExtension = "backup";
               home-manager.extraSpecialArgs = specialArgs // { system = "aarch64-darwin"; };
-              home-manager.sharedModules = [ mac-app-util.homeManagerModules.default ];
               home-manager.users."${username}" = ./home;
             }
           ];

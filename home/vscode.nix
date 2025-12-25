@@ -8,6 +8,13 @@ let
     ];
   });
 
+  vscodeExtensionsFrozen = (import inputs.nixpkgs {
+    inherit system;
+    overlays = [
+      inputs.nix-vscode-extensions-frozen.overlays.default
+    ];
+  });
+
   # THEMES: install some themes
   themes = with vscodeExtensions.vscode-marketplace; [
     # Light themes
@@ -35,9 +42,9 @@ let
       visualjj.visualjj
       formulahendry.code-runner
       usernamehw.errorlens
-      # igorsbitnev.error-gutters
-      # rodrigocfd.format-comment
-      # ryanluker.vscode-coverage-gutters
+      igorsbitnev.error-gutters
+      rodrigocfd.format-comment
+      ryanluker.vscode-coverage-gutters
       bierner.markdown-mermaid
 
       neo4j-extensions.neo4j-for-vscode
@@ -89,7 +96,7 @@ let
 
     "terminal.integrated.fontFamily" = "'Monaspace Krypton', Menlo, Monaco, 'Courier New', monospace";
     "terminal.integrated.fontSize" = 12;
-    "terminal.integrated.fontLigatures" = "'calt', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09', 'liga'";
+    "terminal.integrated.fontLigatures.enabled" = true;
     "terminal.integrated.fontWeight" = 500;
     "terminal.integrated.fontWeightBold" = 800;
 
@@ -149,12 +156,12 @@ let
   # EXTENSIONS & USER SETTINGS for protobuf development.
   protobuf = {
     extensions = with vscodeExtensions.vscode-marketplace; [
-      zxh404.vscode-proto3
       bufbuild.vscode-buf
     ];
     userSettings = {
       "[proto3]" = {
         "editor.formatOnSave" = true;
+        "editor.defaultFormatter" = "bufbuild.vscode-buf";
         "editor.tabSize" = 2;
         "editor.rulers" = [ 80 ];
       };
@@ -162,7 +169,7 @@ let
   };
 
   rust = {
-    extensions = (with vscodeExtensions.vscode-marketplace-release-universal; [
+    extensions = (with vscodeExtensionsFrozen.vscode-marketplace-universal; [
       vadimcn.vscode-lldb
     ]) ++ (with vscodeExtensions.vscode-marketplace; [
       tamasfe.even-better-toml
@@ -198,6 +205,7 @@ let
     userSettings = {
       "[typst]" = {
         "editor.formatOnSave" = true;
+        "editor.defaultFormatter" = "myriad-dreamin.tinymist";
       };
     };
   };
@@ -205,8 +213,18 @@ let
   go = {
     extensions = (with vscodeExtensions.vscode-marketplace-release-universal; [ 
       golang.go
-    ]) ++ [vscodeExtensions.vscode-marketplace."766b"."go-outliner"];
+    ]);
     userSettings = {
+      "[go]" = {
+        "editor.insertSpaces" = false;
+        "editor.formatOnSave" = true;
+        "editor.formatOnSaveMode" = "file";
+        "editor.stickyScroll.enabled" = true;
+        "editor.codeActionsOnSave" = {
+          "source.organizeImports" = "always";
+          "source.fixAll" = "always";
+        };
+      };
       "go.toolsManagement.autoUpdate" = true;
       "go.useLanguageServer" = true;
       "go.lintTool" = "golangci-lint";
@@ -219,16 +237,6 @@ let
       };
       "go.enableCodeLens" = {
         "runtest" = true;
-      };
-      "[go]" = {
-        "editor.insertSpaces" = false;
-        "editor.formatOnSave" = true;
-        "editor.formatOnSaveMode" = "file";
-        "editor.stickyScroll.enabled" = true;
-        "editor.codeActionsOnSave" = {
-          "source.organizeImports" = "always";
-          "source.fixAll" = "always";
-        };
       };
       "go.inlayHints.assignVariableTypes" = true;
       "go.inlayHints.compositeLiteralFields" = true;
@@ -251,9 +259,12 @@ let
       "[python]" = {
         "editor.rulers" = [ 100 ];
         "editor.defaultFormatter" = "charliermarsh.ruff";
+        "editor.formatOnSave" = true;
+        "editor.codeActionsOnSave" = {
+          "source.organizeImports.ruff" = "always";
+        };
       };
-      "python.analysis.autoImportCompletions" = true;
-      "python.analysis.fixAll" = [ "source.unusedImports" ];
+      "ruff.configurationPreference" = "filesystemFirst";
     };
   };
 
