@@ -176,6 +176,7 @@ let
       rust-lang.rust-analyzer
       masterustacean.cargo-runner
       mitsuhiko.insta
+      matteobigoi.bacon-ls-vscode
     ]);
     userSettings = {
       "[rust]" = {

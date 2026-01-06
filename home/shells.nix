@@ -1,6 +1,7 @@
-_: {
+{ config, ... }: {
   programs.zsh = {
     enable = true;
+    dotDir = config.home.homeDirectory;
     autocd = true;
     enableCompletion = true;
     enableVteIntegration = true;

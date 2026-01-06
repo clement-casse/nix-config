@@ -8,6 +8,7 @@
     vim
     wget
 
+    bacon
     buf
     grpcurl
     grpcui
